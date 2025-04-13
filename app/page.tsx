@@ -1,8 +1,9 @@
 "use client"
 
-import { Mail, Users, Target, FileText, Paperclip, RefreshCw, Lock } from "lucide-react"
+import { Mail, Users, Target, FileText, Paperclip, RefreshCw, Lock, Github, Star } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CodeBlock } from "@/components/code-block"
+import { ThemeToggle } from "@/components/theme-toggle"
 import { useEffect, useState } from "react"
 
 export default function Home() {
@@ -22,9 +23,14 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <header className="w-full border-b bg-background py-4 md:py-6">
-        <div className="container flex flex-col items-center justify-center space-y-2 md:space-y-4 text-center px-4">
+    <div className="flex min-h-screen flex-col dark:bg-[#0F0F10]">
+      <header className="w-full border-b bg-background py-4 md:py-6 dark:bg-[#0F0F10]">
+        <div className="container flex flex-col items-center justify-center space-y-2 md:space-y-4 text-center px-4 relative ">
+          {/* Theme Toggle Button - Posicionado no canto superior direito */}
+          <div className="absolute right-4 top-0">
+            <ThemeToggle />
+          </div>
+
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter">Metigan SDK</h1>
           <p className="max-w-[42rem] text-sm md:text-base lg:text-xl leading-normal text-muted-foreground">
             A powerful and flexible SDK for integrating with the Metigan email and audience management platform.
@@ -372,24 +378,24 @@ try {
             <h2 className="mb-4 md:mb-6 text-2xl md:text-3xl font-bold tracking-tighter">API Reference</h2>
 
             <h3 className="mb-4 text-xl font-bold">Core Methods</h3>
-            <div className="mb-8 overflow-hidden rounded-lg border">
+            <div className="mb-8 overflow-hidden rounded-lg border dark:border-gray-700">
               <div className="overflow-x-auto -mx-4 md:mx-0">
                 <div className="min-w-full px-4 md:px-0">
                   <table className="w-full">
                     <thead>
-                      <tr className="border-b bg-muted/50">
+                      <tr className="border-b bg-muted/50 dark:bg-gray-800 dark:border-gray-700">
                         <th className="px-3 md:px-4 py-2 text-left text-xs md:text-sm font-medium">Method</th>
                         <th className="px-3 md:px-4 py-2 text-left text-xs md:text-sm font-medium">Description</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr className="border-b">
+                      <tr className="border-b dark:border-gray-700">
                         <td className="px-3 md:px-4 py-2 font-mono text-xs md:text-sm">sendEmail(options)</td>
                         <td className="px-3 md:px-4 py-2 text-xs md:text-sm">
                           Sends an email with the specified options
                         </td>
                       </tr>
-                      <tr className="border-b">
+                      <tr className="border-b dark:border-gray-700">
                         <td className="px-3 md:px-4 py-2 font-mono text-xs md:text-sm">
                           sendEmailWithTemplate(options)
                         </td>
@@ -408,18 +414,18 @@ try {
             </div>
 
             <h3 className="mb-4 text-xl font-bold">Contact Methods</h3>
-            <div className="mb-8 overflow-hidden rounded-lg border">
+            <div className="mb-8 overflow-hidden rounded-lg border dark:border-gray-700">
               <div className="overflow-x-auto -mx-4 md:mx-0">
                 <div className="min-w-full px-4 md:px-0">
                   <table className="w-full">
                     <thead>
-                      <tr className="border-b bg-muted/50">
+                      <tr className="border-b bg-muted/50 dark:bg-gray-800 dark:border-gray-700">
                         <th className="px-3 md:px-4 py-2 text-left text-xs md:text-sm font-medium">Method</th>
                         <th className="px-3 md:px-4 py-2 text-left text-xs md:text-sm font-medium">Description</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr className="border-b">
+                      <tr className="border-b dark:border-gray-700">
                         <td className="px-3 md:px-4 py-2 font-mono text-xs md:text-sm">
                           createContacts(emails, options)
                         </td>
@@ -427,17 +433,17 @@ try {
                           Creates contacts in the specified audience
                         </td>
                       </tr>
-                      <tr className="border-b">
+                      <tr className="border-b dark:border-gray-700">
                         <td className="px-3 md:px-4 py-2 font-mono text-xs md:text-sm">
                           getContact(email, audienceId)
                         </td>
                         <td className="px-3 md:px-4 py-2 text-xs md:text-sm">Gets a contact by email</td>
                       </tr>
-                      <tr className="border-b">
+                      <tr className="border-b dark:border-gray-700">
                         <td className="px-3 md:px-4 py-2 font-mono text-xs md:text-sm">listContacts(options)</td>
                         <td className="px-3 md:px-4 py-2 text-xs md:text-sm">Lists contacts in an audience</td>
                       </tr>
-                      <tr className="border-b">
+                      <tr className="border-b dark:border-gray-700">
                         <td className="px-3 md:px-4 py-2 font-mono text-xs md:text-sm">
                           updateContact(email, options)
                         </td>
@@ -456,30 +462,30 @@ try {
             </div>
 
             <h3 className="mb-4 text-xl font-bold">Audience Methods</h3>
-            <div className="overflow-hidden rounded-lg border">
+            <div className="overflow-hidden rounded-lg border dark:border-gray-700">
               <div className="overflow-x-auto -mx-4 md:mx-0">
                 <div className="min-w-full px-4 md:px-0">
                   <table className="w-full">
                     <thead>
-                      <tr className="border-b bg-muted/50">
+                      <tr className="border-b bg-muted/50 dark:bg-gray-800 dark:border-gray-700">
                         <th className="px-3 md:px-4 py-2 text-left text-xs md:text-sm font-medium">Method</th>
                         <th className="px-3 md:px-4 py-2 text-left text-xs md:text-sm font-medium">Description</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr className="border-b">
+                      <tr className="border-b dark:border-gray-700">
                         <td className="px-3 md:px-4 py-2 font-mono text-xs md:text-sm">createAudience(options)</td>
                         <td className="px-3 md:px-4 py-2 text-xs md:text-sm">Creates a new audience</td>
                       </tr>
-                      <tr className="border-b">
+                      <tr className="border-b dark:border-gray-700">
                         <td className="px-3 md:px-4 py-2 font-mono text-xs md:text-sm">getAudiences()</td>
                         <td className="px-3 md:px-4 py-2 text-xs md:text-sm">Gets all audiences</td>
                       </tr>
-                      <tr className="border-b">
+                      <tr className="border-b dark:border-gray-700">
                         <td className="px-3 md:px-4 py-2 font-mono text-xs md:text-sm">getAudience(id)</td>
                         <td className="px-3 md:px-4 py-2 text-xs md:text-sm">Gets an audience by ID</td>
                       </tr>
-                      <tr className="border-b">
+                      <tr className="border-b dark:border-gray-700">
                         <td className="px-3 md:px-4 py-2 font-mono text-xs md:text-sm">updateAudience(id, options)</td>
                         <td className="px-3 md:px-4 py-2 text-xs md:text-sm">Updates an audience</td>
                       </tr>
@@ -494,18 +500,18 @@ try {
             </div>
 
             <h3 className="mb-4 text-xl font-bold">Combined Methods</h3>
-            <div className="overflow-hidden rounded-lg border">
+            <div className="overflow-hidden rounded-lg border dark:border-gray-700">
               <div className="overflow-x-auto -mx-4 md:mx-0">
                 <div className="min-w-full px-4 md:px-0">
                   <table className="w-full">
                     <thead>
-                      <tr className="border-b bg-muted/50">
+                      <tr className="border-b bg-muted/50 dark:bg-gray-800 dark:border-gray-700">
                         <th className="px-3 md:px-4 py-2 text-left text-xs md:text-sm font-medium">Method</th>
                         <th className="px-3 md:px-4 py-2 text-left text-xs md:text-sm font-medium">Description</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr className="border-b">
+                      <tr className="border-b dark:border-gray-700">
                         <td className="px-3 md:px-4 py-2 font-mono text-xs md:text-sm">
                           sendEmailAndCreateContacts(options)
                         </td>
@@ -563,9 +569,22 @@ try {
         </div>
       </main>
 
-      <footer className="border-t py-4 md:py-6">
-        <div className="container flex flex-col items-center justify-center space-y-1 md:space-y-2 text-center px-4">
+      <footer className="border-t py-4 md:py-6 dark:border-gray-800">
+        <div className="container flex flex-col items-center justify-center space-y-3 md:space-y-4 text-center px-4">
           <p className="text-xs md:text-sm text-muted-foreground">Made with ❤️ by the Metigan Team</p>
+
+          {/* GitHub Star Button */}
+          <a
+            href="https://github.com/metigan/metigan-sdk"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center px-4 py-2 rounded-md bg-[#24292e] text-white hover:bg-[#2c3137] transition-colors text-sm dark:bg-gray-700 dark:hover:bg-gray-600"
+          >
+            <Github className="h-4 w-4 mr-2" />
+            <Star className="h-3.5 w-3.5 mr-1.5 fill-current" />
+            <span>Give us a star on GitHub</span>
+          </a>
+
           <p className="text-xs md:text-sm text-muted-foreground">This project is licensed under the MIT License</p>
         </div>
       </footer>
