@@ -37,7 +37,7 @@ export default function Home() {
           </p>
           <button
             className="mt-4 inline-flex h-10 items-center justify-center rounded-md bg-[#b026ff] px-6 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-[#b026ff]/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-            onClick={() => window.open("#", "_blank")}
+            onClick={() => window.open("https://metigan.com", "_blank")}
           >
             Get Started
           </button>
@@ -575,7 +575,7 @@ try {
 
           {/* GitHub Star Button */}
           <a
-            href="https://github.com/metigan/metigan-sdk"
+            href="https://github.com/metigan/metigan"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center px-4 py-2 rounded-md bg-[#24292e] text-white hover:bg-[#2c3137] transition-colors text-sm dark:bg-gray-700 dark:hover:bg-gray-600"
