@@ -4,8 +4,8 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 0 0% 0%;
+    --foreground: 210 40% 98%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
@@ -27,7 +27,7 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 0 0% 0%;
     --foreground: 210 40% 98%;
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
@@ -138,4 +138,136 @@ pre code.hljs {
 
 .hljs-strong {
   @apply font-bold;
+}
+
+/* 3D Perspective for envelope animation */
+.perspective-1000 {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* Professional typography and spacing for docs */
+.prose {
+  @apply text-base leading-7;
+}
+
+.prose h1 {
+  @apply text-4xl md:text-5xl font-bold tracking-tight mb-6 mt-0;
+}
+
+.prose h2 {
+  @apply text-3xl md:text-4xl font-bold tracking-tight mt-12 mb-6 scroll-mt-20;
+}
+
+.prose h3 {
+  @apply text-2xl md:text-3xl font-semibold tracking-tight mt-8 mb-4 scroll-mt-20;
+}
+
+.prose h4 {
+  @apply text-xl md:text-2xl font-semibold tracking-tight mt-6 mb-3;
+}
+
+.prose p {
+  @apply mb-6 leading-relaxed;
+}
+
+.prose ul,
+.prose ol {
+  @apply mb-6 ml-6 space-y-2;
+}
+
+.prose ul {
+  @apply list-disc;
+}
+
+.prose ol {
+  @apply list-decimal;
+}
+
+.prose li {
+  @apply leading-relaxed;
+}
+
+.prose a {
+  @apply text-primary hover:underline font-medium;
+}
+
+.prose code {
+  @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono;
+}
+
+.prose pre {
+  @apply mb-6 rounded-lg overflow-hidden;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-muted pl-4 italic my-6;
+}
+
+.prose table {
+  @apply w-full border-collapse mb-6;
+}
+
+.prose th {
+  @apply border-b border-border p-3 text-left font-semibold;
+}
+
+.prose td {
+  @apply border-b border-border p-3;
+}
+
+.prose img {
+  @apply rounded-lg my-6;
+}
+
+/* Gradient animation for hero text */
+@keyframes gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 8s ease infinite;
+}
+
+/* Tech icon outline style - usando SVG como máscara para criar outline */
+.tech-icon-outline {
+  position: relative;
+  filter: brightness(0) invert(1);
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.tech-icon-outline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  -webkit-mask: var(--icon-url) center/contain no-repeat;
+  mask: var(--icon-url) center/contain no-repeat;
+  -webkit-mask-composite: subtract;
+  mask-composite: exclude;
+}
+
+.tech-icon-outline:hover {
+  opacity: 0.9;
+}
+
+/* Slow pulse animation for illustrations */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
 }
