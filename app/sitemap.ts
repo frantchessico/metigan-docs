@@ -12,17 +12,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'daily',
       priority: 1,
     },
-    {
-      url: `${baseUrl}/docs/quick-start`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
   ]
 
-  // Add all doc pages
-  const addDocItems = (items: typeof docsConfig.mainNav) => {
-    items.forEach((item) => {
+  // Add all doc pages from docsConfig
+  docsConfig.forEach((section) => {
+    section.items.forEach((item) => {
       if (item.href) {
         routes.push({
           url: `${baseUrl}${item.href}`,
@@ -31,23 +25,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
           priority: 0.8,
         })
       }
-      if ('items' in item && item.items) {
-        item.items.forEach((subItem) => {
-          if (subItem.href) {
-            routes.push({
-              url: `${baseUrl}${subItem.href}`,
-              lastModified: new Date(),
-              changeFrequency: 'weekly',
-              priority: 0.7,
-            })
-          }
-        })
-      }
     })
-  }
-
-  addDocItems(docsConfig.mainNav)
-  addDocItems(docsConfig.sidebarNav)
+  })
 
   return routes
 }
