@@ -209,12 +209,6 @@ export const docsConfig: DocSection[] = [
         icon: Code,
       },
       {
-        title: "Java",
-        href: "/docs/examples/java",
-        description: "Java integration examples and patterns",
-        icon: Code,
-      },
-      {
         title: "PHP",
         href: "/docs/examples/php",
         description: "PHP integration examples and patterns",

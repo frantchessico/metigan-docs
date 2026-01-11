@@ -31,11 +31,6 @@ const technologies = [
     color: "#777BB4" // Roxo PHP
   },
   { 
-    name: "Java", 
-    iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg",
-    color: "#ED8B00" // Laranja Java
-  },
-  { 
     name: "Go", 
     iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original-wordmark.svg",
     color: "#00ADD8" // Azul ciano Go
@@ -105,18 +100,6 @@ $result = $client->email()->sendEmail(
 );
 
 echo $result['message'];` },
-  { name: "Java", code: `import com.metigan.MetiganClient;
-
-MetiganClient client = MetiganClient.fromEnvironment();
-
-var result = client.email().sendEmail(
-    "Sender <sender@example.com>",
-    "Hello from Java!",
-    "<h1>Hello!</h1><p>This email was sent from Java.</p>",
-    "recipient@example.com"
-);
-
-System.out.println(result.getMessage());` },
   { name: "Go", code: `package main
 
 import "github.com/metigan/metigan-go"
@@ -239,7 +222,7 @@ export default function Home() {
     "description": "Build powerful email solutions with Metigan SDK. Mass email delivery simplified for everyone.",
     "url": process.env.NEXT_PUBLIC_SITE_URL || "https://docs.metigan.com",
     "softwareVersion": "1.0",
-    "programmingLanguage": ["JavaScript", "TypeScript", "Python", "PHP", "Java", "Go"],
+    "programmingLanguage": ["JavaScript", "TypeScript", "Python", "PHP", "Go"],
     "featureList": [
       "Email API",
       "Mass Email Delivery",
@@ -475,19 +458,17 @@ export default function Home() {
                   activeFramework === 1 ? "typescript" :
                   activeFramework === 2 ? "python" :
                   activeFramework === 3 ? "php" :
-                  activeFramework === 4 ? "java" :
-                  activeFramework === 5 ? "go" :
+                  activeFramework === 4 ? "go" :
+                  activeFramework === 5 ? "typescript" :
                   activeFramework === 6 ? "typescript" :
-                  activeFramework === 7 ? "typescript" :
                   "typescript"
                 }
                 fileName={
                   activeFramework === 2 ? "example.py" :
                   activeFramework === 3 ? "example.php" :
-                  activeFramework === 4 ? "Example.java" :
-                  activeFramework === 5 ? "main.go" :
-                  activeFramework === 6 ? "email.component.ts" :
-                  activeFramework === 7 ? "email.service.ts" :
+                  activeFramework === 4 ? "main.go" :
+                  activeFramework === 5 ? "email.component.ts" :
+                  activeFramework === 6 ? "email.service.ts" :
                   frameworks[activeFramework].name.toLowerCase().replace(".", "") + ".ts"
                 }
                 showLineNumbers={true}

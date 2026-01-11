@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     default: "Metigan SDK - Email API for Developers",
     template: "%s | Metigan SDK"
   },
-  description: "Build powerful email solutions with Metigan SDK. Mass email delivery simplified for everyone. Support for Node.js, Python, PHP, Java, Go, TypeScript, Angular, and NestJS.",
+  description: "Build powerful email solutions with Metigan SDK. Mass email delivery simplified for everyone. Support for Node.js, Python, PHP, Go, TypeScript, Angular, and NestJS.",
   keywords: [
     "email API",
     "email SDK",
@@ -24,7 +24,6 @@ export const metadata: Metadata = {
     "Node.js email",
     "Python email",
     "PHP email",
-    "Java email",
     "Go email",
     "TypeScript email",
     "Angular email",
