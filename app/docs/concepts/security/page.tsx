@@ -20,7 +20,7 @@ export default function SecurityPage() {
 
         <div className="space-y-4">
           <div className="p-6 rounded-lg border-2 bg-muted">
-            <h3 className="text-xl font-semibold mb-3">ðŸ”’ Encrypted Connections</h3>
+            <h3 className="text-xl font-semibold mb-3">🔒 Encrypted Connections</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
               All API requests are made over HTTPS using TLS 1.2 or higher. Data is encrypted in transit 
               to prevent interception and tampering.
@@ -28,7 +28,7 @@ export default function SecurityPage() {
           </div>
 
           <div className="p-6 rounded-lg border-2 bg-muted">
-            <h3 className="text-xl font-semibold mb-3">ðŸ”‘ API Key Security</h3>
+            <h3 className="text-xl font-semibold mb-3">🔑 API Key Security</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
               API keys are hashed and stored securely. Keys can be rotated, revoked, and scoped to 
               specific permissions. Never expose API keys in client-side code.
@@ -36,7 +36,7 @@ export default function SecurityPage() {
           </div>
 
           <div className="p-6 rounded-lg border-2 bg-muted">
-            <h3 className="text-xl font-semibold mb-3">ðŸ›¡ï¸ Input Validation</h3>
+            <h3 className="text-xl font-semibold mb-3">🛡️ Input Validation</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
               All inputs are validated and sanitized to prevent injection attacks, XSS, and other 
               security vulnerabilities. Invalid inputs are rejected with clear error messages.
@@ -54,12 +54,12 @@ export default function SecurityPage() {
         <CodeBlock
           language="typescript"
           fileName="secure-api-key.ts"
-          code={`// âŒ NEVER DO THIS - Exposing API key in code
+          code={`// ❌ NEVER DO THIS - Exposing API key in code
 const metigan = new Metigan({
   apiKey: 'sk_live_1234567890abcdef' // DON'T HARDCODE KEYS!
 });
 
-// âœ… DO THIS - Use environment variables
+// ✅ DO THIS - Use environment variables
 const metigan = new Metigan({
   apiKey: process.env.METIGAN_API_KEY!
 });
@@ -69,7 +69,7 @@ if (!process.env.METIGAN_API_KEY) {
   throw new Error('METIGAN_API_KEY environment variable is required');
 }
 
-// âœ… Use different keys for different environments
+// ✅ Use different keys for different environments
 const metigan = new Metigan({
   apiKey: process.env.NODE_ENV === 'production'
     ? process.env.METIGAN_API_KEY_PRODUCTION!
@@ -125,4 +125,3 @@ METIGAN_API_KEY_PRODUCTION=sk_live_your_prod_key_here`}
     </div>
   )
 }
-
