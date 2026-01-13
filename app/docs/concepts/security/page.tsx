@@ -95,18 +95,6 @@ METIGAN_API_KEY_PRODUCTION=sk_live_your_prod_key_here`}
             />
           </div>
 
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Secret Management</h3>
-            <p className="text-muted-foreground mb-4 leading-relaxed">
-              Use secure secret management services in production:
-            </p>
-            <ul className="list-disc list-inside space-y-2 text-muted-foreground ml-4">
-              <li>HashiCorp Vault</li>
-              <li>Vercel Environment Variables</li>
-              <li>Azure Key Vault</li>
-              <li>Google Secret Manager</li>
-            </ul>
-          </div>
         </div>
       </section>
 

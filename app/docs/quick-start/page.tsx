@@ -29,7 +29,7 @@ export default function QuickStartPage() {
           </p>
           <Callout variant="warning" title="Security Best Practice">
             <p>
-              Never commit your API key to version control. Always use environment variables or a secure secret management service like HashiCorp Vault, Vercel Environment Variables, or similar.
+              Never commit your API key to version control. Always use environment variables to store your API keys securely.
             </p>
           </Callout>
         </div>

@@ -288,7 +288,7 @@ function handleException(error: unknown) {
       <Callout variant="warning" title="Important">
         <p>
           Always validate and sanitize user input before sending API requests. Never expose API keys 
-          in client-side code. Use environment variables and secure secret management in production.
+          in client-side code. Use environment variables to store your API keys securely.
         </p>
       </Callout>
     </div>

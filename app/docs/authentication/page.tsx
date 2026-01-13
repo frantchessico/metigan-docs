@@ -80,7 +80,7 @@ if (!process.env.METIGAN_API_KEY) {
           <p>
             Always use environment variables for your API keys. Never commit them to version control. 
             Use services like <code className="px-1.5 py-0.5 rounded bg-muted text-sm font-mono">dotenv</code> for local development 
-            and secret management services (HashiCorp Vault, Vercel Environment Variables, Azure Key Vault, etc.) for production.
+            and environment variables for production.
           </p>
         </Callout>
 
