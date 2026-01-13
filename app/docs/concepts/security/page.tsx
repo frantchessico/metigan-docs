@@ -101,7 +101,6 @@ METIGAN_API_KEY_PRODUCTION=sk_live_your_prod_key_here`}
               Use secure secret management services in production:
             </p>
             <ul className="list-disc list-inside space-y-2 text-muted-foreground ml-4">
-              <li>AWS Secrets Manager</li>
               <li>HashiCorp Vault</li>
               <li>Vercel Environment Variables</li>
               <li>Azure Key Vault</li>
