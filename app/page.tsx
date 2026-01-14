@@ -257,106 +257,70 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }}
       />
       
-      <div className="min-h-screen bg-[#000000]">
+      <div className="min-h-screen bg-[#0b0b12]">
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         {/* Background Gradients */}
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        
-        <div className="container mx-auto px-4 pt-32 pb-20 relative z-10">
-          <div className="flex flex-col items-center justify-center text-center space-y-10">
-            {/* Logo/Brand Mark */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#3a1d4d] via-[#1c1b3a] to-[#0b0b12]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-purple-500/10 rounded-full blur-3xl" />
+        <div className="absolute -top-32 left-10 w-72 h-72 bg-fuchsia-400/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
+
+        <div className="container mx-auto px-4 pt-36 pb-24 relative z-10">
+          <div className="flex flex-col items-center justify-center text-center space-y-8">
+            {/* Badge */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{
-                duration: 0.8,
-                ease: [0.6, -0.05, 0.01, 0.99],
-              }}
-              className="mb-6"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm text-xs uppercase tracking-widest text-white/70"
             >
-              <div className="relative">
-                <AnimatedEnvelope />
-                {/* Brand badge */}
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5, duration: 0.5 }}
-                  className="absolute -top-2 -right-2 px-3 py-1 bg-primary/20 border border-primary/30 rounded-full backdrop-blur-sm"
-                >
-                  <span className="text-xs font-semibold text-primary">Metigan</span>
-                </motion.div>
-              </div>
+              Metigan Documentation
             </motion.div>
 
             {/* Headline */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
+            <motion.h1
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="space-y-6 max-w-4xl"
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-white"
             >
-              <div className="space-y-4">
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight">
-                  Mass Email Delivery,
-                  <br />
-                  <span className="relative inline-block">
-                    <span className="relative z-10 bg-gradient-to-r from-primary via-blue-500 to-purple-500 bg-clip-text text-transparent animate-gradient">
-                      Simplified for Everyone
-                    </span>
-                    <motion.span
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
-                      className="absolute bottom-0 left-0 right-0 h-3 bg-gradient-to-r from-primary/30 via-blue-500/30 to-purple-500/30 blur-xl -z-0"
-                    />
-                  </span>
-                </h1>
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                  className="flex items-center justify-center gap-3 text-sm font-medium text-muted-foreground"
-                >
-                  <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary/50" />
-                  <span>Email API for Developers</span>
-                  <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/50" />
-                </motion.div>
-              </div>
-              
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-                className="text-xl md:text-2xl text-muted-foreground/80 max-w-3xl mx-auto leading-relaxed font-light"
-              >
-                Empower your applications with enterprise-grade email infrastructure. Built by developers, for developers—deliver messages that matter, at scale, without complexity.
-              </motion.p>
+              Download‑fast docs,
+              <br />
+              for high‑scale email.
+            </motion.h1>
 
-              {/* CTA Buttons */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1 }}
-                className="flex items-center justify-center gap-4 pt-4"
-              >
-                <Link href="/docs/quick-start">
-                  <Button size="lg" className="text-base px-8 py-6 rounded-lg font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all">
-                    Get Started
-                  </Button>
-                </Link>
-                <Link href="/docs">
-                  <Button 
-                    variant="outline" 
-                    size="lg" 
-                    className="text-base px-8 py-6 rounded-lg font-semibold border-2 hover:bg-primary/5 transition-all"
-                  >
-                    View Docs
-                  </Button>
-                </Link>
-              </motion.div>
+            {/* Subheadline */}
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg md:text-xl text-white/70 max-w-3xl leading-relaxed"
+            >
+              Everything you need to ship reliable email—APIs, SDKs, workflows, and deliverability best practices.
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex items-center justify-center gap-4 pt-2"
+            >
+              <Link href="/docs/quick-start">
+                <Button size="lg" className="text-base px-8 py-6 rounded-lg font-semibold shadow-lg shadow-purple-500/20 hover:shadow-purple-500/30 transition-all">
+                  Get Started
+                </Button>
+              </Link>
+              <Link href="/docs">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="text-base px-8 py-6 rounded-lg font-semibold border-white/20 text-white hover:bg-white/5 transition-all"
+                >
+                  View Docs
+                </Button>
+              </Link>
             </motion.div>
           </div>
         </div>
