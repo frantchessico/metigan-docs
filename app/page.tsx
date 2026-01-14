@@ -275,7 +275,7 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm text-xs uppercase tracking-widest text-white/70"
             >
-              Metigan Documentation
+              Email API for Developers
             </motion.div>
 
             {/* Headline */}
@@ -285,9 +285,9 @@ export default function Home() {
               transition={{ duration: 0.7, delay: 0.1 }}
               className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-white"
             >
-              Download‑fast docs,
+              Mass Email Delivery,
               <br />
-              for high‑scale email.
+              Simplified for Everyone
             </motion.h1>
 
             {/* Subheadline */}
@@ -297,7 +297,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg md:text-xl text-white/70 max-w-3xl leading-relaxed"
             >
-              Everything you need to ship reliable email—APIs, SDKs, workflows, and deliverability best practices.
+              Empower your applications with enterprise-grade email infrastructure. Built by developers, for developers—deliver messages that matter, at scale, without complexity.
             </motion.p>
 
             {/* CTA Buttons */}
