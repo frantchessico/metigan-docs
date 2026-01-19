@@ -697,12 +697,12 @@ export default function Home() {
               </div>
               
               <div className="flex items-center gap-2 sm:gap-3">
-                <Link href="https://metigan.com/sign-in" className="hidden sm:block">
+                <Link href="https://app.metigan.com/sign-in" className="hidden sm:block">
                   <Button variant="ghost" size="sm" className="text-sm">
                     Sign In
                   </Button>
                 </Link>
-                <Link href="https://metigan.com/sign-up">
+                <Link href="https://app.metigan.com/sign-up">
                   <Button size="sm" className="text-xs sm:text-sm bg-white text-black hover:bg-white/90">
                     Get Started
                   </Button>
@@ -768,7 +768,7 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-2"
               >
-                <Link href="https://metigan.com/sign-up" className="w-full sm:w-auto">
+                <Link href="https://app.metigan.com/sign-up" className="w-full sm:w-auto">
                   <Button size="lg" className="w-full sm:w-auto text-sm sm:text-base px-6 sm:px-8 bg-white text-black hover:bg-white/90 gap-2">
                     Get Started
                     <ArrowRight className="w-4 h-4" />
@@ -957,7 +957,7 @@ export default function Home() {
               </p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-2">
-                <Link href="https://metigan.com/sign-up" className="w-full sm:w-auto">
+                <Link href="https://app.metigan.com/sign-up" className="w-full sm:w-auto">
                   <Button size="lg" className="w-full sm:w-auto text-sm sm:text-base px-6 sm:px-8 bg-white text-black hover:bg-white/90 gap-2">
                     Start for Free
                     <ArrowRight className="w-4 h-4" />
