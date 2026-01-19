@@ -10,8 +10,9 @@ const calloutVariants = cva(
       variant: {
         default: "bg-muted text-muted-foreground [&>svg]:text-muted-foreground",
         note: "bg-blue-500/10 border-blue-500/20 text-blue-900 dark:text-blue-400 [&>svg]:text-blue-600 dark:[&>svg]:text-blue-400",
+        info: "bg-blue-500/10 border-blue-500/20 text-blue-900 dark:text-blue-400 [&>svg]:text-blue-600 dark:[&>svg]:text-blue-400",
         warning: "bg-yellow-500/10 border-yellow-500/20 text-yellow-900 dark:text-yellow-400 [&>svg]:text-yellow-600 dark:[&>svg]:text-yellow-400",
-        error: "bg-red-500/10 border-red-500/20 text-red-900 dark:text-red-400 [&>svg]:text-red-600 dark:[&&>svg]:text-red-400",
+        error: "bg-red-500/10 border-red-500/20 text-red-900 dark:text-red-400 [&>svg]:text-red-600 dark:[&>svg]:text-red-400",
         success: "bg-green-500/10 border-green-500/20 text-green-900 dark:text-green-400 [&>svg]:text-green-600 dark:[&>svg]:text-green-400",
         tip: "bg-purple-500/10 border-purple-500/20 text-purple-900 dark:text-purple-400 [&>svg]:text-purple-600 dark:[&>svg]:text-purple-400",
       },
@@ -25,6 +26,7 @@ const calloutVariants = cva(
 const iconMap = {
   default: Info,
   note: Info,
+  info: Info,
   warning: AlertTriangle,
   error: AlertCircle,
   success: CheckCircle2,

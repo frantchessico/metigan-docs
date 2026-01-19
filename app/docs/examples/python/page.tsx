@@ -116,6 +116,117 @@ result = client.email.send_email(
       </section>
 
       <section className="space-y-6">
+        <h2 className="text-3xl font-bold tracking-tight scroll-mt-20">OTP Email (Verification Code)</h2>
+        <p className="text-muted-foreground mb-4">
+          Send One-Time Password emails with priority delivery and built-in rate limiting.
+        </p>
+        <CodeBlock
+          language="python"
+          fileName="otp-example.py"
+          code={`import random
+from metigan import MetiganClient
+
+client = MetiganClient(api_key="your-api-key")
+
+def send_verification_code(user_email: str) -> dict:
+    """Send OTP with default template"""
+    code = str(random.randint(100000, 999999))
+    
+    result = client.email.send_otp(
+        to=user_email,
+        from_address="security@myapp.com",
+        code=code,
+        app_name="MyApp",
+        expires_in_minutes=10
+    )
+    
+    if result.get("success"):
+        print(f"OTP sent! Tracking: {result['trackingId']}")
+        return {"success": True, "code": code}
+    return {"success": False, "error": result.get("error")}
+
+def send_branded_otp(user_email: str, template_id: str) -> dict:
+    """Send OTP with custom branded template"""
+    code = str(random.randint(100000, 999999))
+    
+    result = client.email.send_otp(
+        to=user_email,
+        from_address="security@myapp.com",
+        code=code,
+        app_name="MyApp",
+        expires_in_minutes=5,
+        template_id=template_id  # Custom template
+    )
+    
+    return result`}
+        />
+      </section>
+
+      <section className="space-y-6">
+        <h2 className="text-3xl font-bold tracking-tight scroll-mt-20">Transactional Email (Fast Lane)</h2>
+        <p className="text-muted-foreground mb-4">
+          Send time-sensitive transactional emails like password resets, receipts, and confirmations.
+        </p>
+        <CodeBlock
+          language="python"
+          fileName="transactional-example.py"
+          code={`from metigan import MetiganClient
+
+client = MetiganClient(api_key="your-api-key")
+
+def send_password_reset(user_email: str, reset_link: str) -> dict:
+    """Send password reset email"""
+    result = client.email.send_transactional(
+        to=user_email,
+        from_address="security@myapp.com",
+        subject="Reset Your Password",
+        content=f"""
+            <h1>Password Reset</h1>
+            <p>Click the link below to reset your password:</p>
+            <a href="{reset_link}" style="padding: 12px 24px; background: #2563eb; 
+               color: white; text-decoration: none; border-radius: 8px;">
+                Reset Password
+            </a>
+            <p style="color: #666; margin-top: 20px;">This link expires in 1 hour.</p>
+        """
+    )
+    return result
+
+def send_order_confirmation(order: dict) -> dict:
+    """Send order confirmation email"""
+    result = client.email.send_transactional(
+        to=order["customer_email"],
+        from_address="orders@myshop.com",
+        subject=f"Order Confirmed #{order['id']}",
+        content=f"""
+            <h1>Thank you for your order!</h1>
+            <p>Order #{order['id']} has been confirmed.</p>
+            <p><strong>Total:</strong> ${order['total']:.2f}</p>
+            <a href="https://myshop.com/orders/{order['id']}">Track Your Order</a>
+        """
+    )
+    return result
+
+def send_payment_receipt(payment: dict) -> dict:
+    """Send payment receipt email"""
+    result = client.email.send_transactional(
+        to=payment["customer_email"],
+        from_address="billing@myservice.com",
+        subject=f"Payment Receipt - {payment['currency']} {payment['amount']:.2f}",
+        content=f"""
+            <h1>Payment Receipt</h1>
+            <p>Thank you for your payment.</p>
+            <div style="background: #f5f5f5; padding: 20px; border-radius: 8px;">
+                <p><strong>Amount:</strong> {payment['currency']} {payment['amount']:.2f}</p>
+                <p><strong>Receipt ID:</strong> {payment['id']}</p>
+                <p><strong>Date:</strong> {payment['date']}</p>
+            </div>
+        """
+    )
+    return result`}
+        />
+
+      <section className="space-y-6">
         <h2 className="text-3xl font-bold tracking-tight scroll-mt-20">Contact Management</h2>
         
         <h3 className="text-2xl font-semibold mb-4">Create Contact</h3>

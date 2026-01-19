@@ -2,50 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================================
+   METIGAN DOCS - PROFESSIONAL DARK THEME
+   Inspired by Resend's elegant, minimal design
+   ============================================================================ */
+
 @layer base {
   :root {
     --background: 0 0% 0%;
-    --foreground: 210 40% 98%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 55%;
+    --accent: 0 0% 10%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 98%;
     --radius: 0.5rem;
+    
+    /* Brand colors */
+    --brand-cyan: 180 100% 50%;
+    --brand-blue: 220 100% 60%;
+    --brand-purple: 270 100% 60%;
   }
 
   .dark {
     --background: 0 0% 0%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 55%;
+    --accent: 0 0% 10%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 98%;
   }
 }
 
@@ -53,20 +63,274 @@
   * {
     @apply border-border;
   }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 
-  pre {
-    @apply font-mono text-sm;
-  }
-
-  code {
-    @apply text-foreground;
+  ::selection {
+    @apply bg-white/20;
   }
 }
 
-/* Estilos para o highlight.js */
+/* ============================================================================
+   TYPOGRAPHY
+   ============================================================================ */
+
+.text-gradient {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(
+    to right,
+    hsl(var(--foreground)),
+    hsl(var(--muted-foreground))
+  );
+}
+
+.text-gradient-brand {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(
+    135deg,
+    hsl(180, 100%, 70%) 0%,
+    hsl(220, 100%, 70%) 50%,
+    hsl(270, 100%, 70%) 100%
+  );
+}
+
+/* ============================================================================
+   ANIMATIONS
+   ============================================================================ */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-up {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes fade-down {
+  from { 
+    opacity: 0; 
+    transform: translateY(-20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes scale-in {
+  from { 
+    opacity: 0; 
+    transform: scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+}
+
+@keyframes slide-in-left {
+  from { 
+    opacity: 0; 
+    transform: translateX(-20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+}
+
+@keyframes slide-in-right {
+  from { 
+    opacity: 0; 
+    transform: translateX(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes border-dance {
+  0%, 100% { 
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  50% { 
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.animate-fade-in { animation: fade-in 0.6s ease-out forwards; }
+.animate-fade-up { animation: fade-up 0.6s ease-out forwards; }
+.animate-fade-down { animation: fade-down 0.6s ease-out forwards; }
+.animate-scale-in { animation: scale-in 0.5s ease-out forwards; }
+.animate-slide-in-left { animation: slide-in-left 0.6s ease-out forwards; }
+.animate-slide-in-right { animation: slide-in-right 0.6s ease-out forwards; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-glow { animation: glow 2s ease-in-out infinite; }
+.animate-pulse-soft { animation: pulse-soft 3s ease-in-out infinite; }
+.animate-gradient { 
+  background-size: 200% 200%; 
+  animation: gradient-shift 8s ease infinite; 
+}
+.animate-shimmer { animation: shimmer 2s infinite; }
+.animate-rotate-slow { animation: rotate-slow 20s linear infinite; }
+.animate-border-dance { animation: border-dance 2s ease-in-out infinite; }
+
+/* Animation delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-700 { animation-delay: 700ms; }
+.delay-800 { animation-delay: 800ms; }
+
+/* Initially hidden for animations */
+.opacity-0-initial { opacity: 0; }
+
+/* ============================================================================
+   BACKGROUNDS & EFFECTS
+   ============================================================================ */
+
+.bg-grid {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.bg-grid-small {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.bg-dot-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.bg-noise {
+  position: relative;
+}
+
+.bg-noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+.gradient-blur {
+  filter: blur(100px);
+}
+
+.gradient-blur-sm {
+  filter: blur(60px);
+}
+
+/* Glassmorphism */
+.glass {
+  @apply bg-white/5 backdrop-blur-xl border border-white/10;
+}
+
+.glass-hover {
+  @apply transition-all duration-300 hover:bg-white/10 hover:border-white/20;
+}
+
+/* ============================================================================
+   BUTTONS & INTERACTIVE
+   ============================================================================ */
+
+.btn-glow {
+  @apply relative overflow-hidden;
+}
+
+.btn-glow::before {
+  content: "";
+  @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 70%);
+}
+
+.btn-glow:hover::before {
+  @apply opacity-100;
+}
+
+.link-hover {
+  @apply relative;
+}
+
+.link-hover::after {
+  content: "";
+  @apply absolute bottom-0 left-0 w-0 h-px bg-current transition-all duration-300;
+}
+
+.link-hover:hover::after {
+  @apply w-full;
+}
+
+/* ============================================================================
+   CODE BLOCKS
+   ============================================================================ */
+
+pre {
+  @apply font-mono text-sm;
+}
+
+code {
+  @apply text-foreground;
+}
+
 pre code.hljs {
   @apply block overflow-auto p-0;
 }
@@ -77,13 +341,13 @@ pre code.hljs {
 
 .hljs-comment,
 .hljs-quote {
-  @apply text-muted-foreground;
+  @apply text-muted-foreground/70;
 }
 
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-addition {
-  @apply text-blue-500;
+  @apply text-cyan-400;
 }
 
 .hljs-number,
@@ -92,7 +356,7 @@ pre code.hljs {
 .hljs-literal,
 .hljs-doctag,
 .hljs-regexp {
-  @apply text-emerald-500;
+  @apply text-emerald-400;
 }
 
 .hljs-title,
@@ -100,7 +364,7 @@ pre code.hljs {
 .hljs-name,
 .hljs-selector-id,
 .hljs-selector-class {
-  @apply text-purple-500;
+  @apply text-yellow-400;
 }
 
 .hljs-attribute,
@@ -109,7 +373,7 @@ pre code.hljs {
 .hljs-template-variable,
 .hljs-class .hljs-title,
 .hljs-type {
-  @apply text-orange-500;
+  @apply text-orange-400;
 }
 
 .hljs-symbol,
@@ -120,12 +384,12 @@ pre code.hljs {
 .hljs-selector-attr,
 .hljs-selector-pseudo,
 .hljs-link {
-  @apply text-rose-500;
+  @apply text-pink-400;
 }
 
 .hljs-built_in,
 .hljs-deletion {
-  @apply text-yellow-500;
+  @apply text-red-400;
 }
 
 .hljs-formula {
@@ -140,13 +404,101 @@ pre code.hljs {
   @apply font-bold;
 }
 
-/* 3D Perspective for envelope animation */
+/* ============================================================================
+   3D EFFECTS
+   ============================================================================ */
+
 .perspective-1000 {
   perspective: 1000px;
+}
+
+.perspective-2000 {
+  perspective: 2000px;
+}
+
+.transform-style-3d {
   transform-style: preserve-3d;
 }
 
-/* Professional typography and spacing for docs */
+.rotate-y-6 {
+  transform: rotateY(6deg);
+}
+
+.rotate-x-6 {
+  transform: rotateX(6deg);
+}
+
+/* ============================================================================
+   CARDS & CONTAINERS
+   ============================================================================ */
+
+.card-hover {
+  @apply transition-all duration-300;
+}
+
+.card-hover:hover {
+  @apply -translate-y-1 shadow-xl shadow-white/5;
+}
+
+.card-border-gradient {
+  @apply relative rounded-xl overflow-hidden;
+}
+
+.card-border-gradient::before {
+  content: "";
+  @apply absolute inset-0 rounded-xl;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* ============================================================================
+   SCROLLBAR
+   ============================================================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-white/20;
+}
+
+/* ============================================================================
+   RESPONSIVE UTILITIES
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .mobile-padding {
+    @apply px-4;
+  }
+}
+
+/* ============================================================================
+   PROSE (Documentation)
+   ============================================================================ */
+
 .prose {
   @apply text-base leading-7;
 }
@@ -189,7 +541,7 @@ pre code.hljs {
 }
 
 .prose a {
-  @apply text-primary hover:underline font-medium;
+  @apply text-white hover:underline font-medium;
 }
 
 .prose code {
@@ -220,54 +572,38 @@ pre code.hljs {
   @apply rounded-lg my-6;
 }
 
-/* Gradient animation for hero text */
-@keyframes gradient {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
+/* ============================================================================
+   FEATURE ICONS
+   ============================================================================ */
+
+.feature-icon {
+  @apply relative w-12 h-12 rounded-lg flex items-center justify-center;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
 }
 
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient 8s ease infinite;
+.feature-icon::before {
+  content: "";
+  @apply absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300;
+  background: linear-gradient(135deg, rgba(56,189,248,0.2) 0%, rgba(139,92,246,0.2) 100%);
 }
 
-/* Tech icon outline style - usando SVG como máscara para criar outline */
-.tech-icon-outline {
-  position: relative;
-  filter: brightness(0) invert(1);
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
+.feature-icon:hover::before {
+  @apply opacity-100;
 }
 
-.tech-icon-outline::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: currentColor;
-  -webkit-mask: var(--icon-url) center/contain no-repeat;
-  mask: var(--icon-url) center/contain no-repeat;
-  -webkit-mask-composite: subtract;
-  mask-composite: exclude;
+/* ============================================================================
+   LOGO MARQUEE
+   ============================================================================ */
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-.tech-icon-outline:hover {
-  opacity: 0.9;
+.animate-marquee {
+  animation: marquee 30s linear infinite;
 }
 
-/* Slow pulse animation for illustrations */
-@keyframes pulse-slow {
-  0%, 100% {
-    opacity: 0.7;
-  }
-  50% {
-    opacity: 0.9;
-  }
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 3s ease-in-out infinite;
+.animate-marquee:hover {
+  animation-play-state: paused;
 }

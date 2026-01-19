@@ -135,6 +135,155 @@ $result = $client->email()->sendEmail(
       </section>
 
       <section className="space-y-6">
+        <h2 className="text-3xl font-bold tracking-tight scroll-mt-20">OTP Email (Verification Code)</h2>
+        <p className="text-muted-foreground mb-4">
+          Send One-Time Password emails with priority delivery and built-in rate limiting.
+        </p>
+        <CodeBlock
+          language="php"
+          fileName="otp-example.php"
+          code={`<?php
+
+use Metigan\\MetiganClient;
+
+$client = new MetiganClient(getenv('METIGAN_API_KEY'));
+
+/**
+ * Send OTP with default template
+ */
+function sendVerificationCode(MetiganClient $client, string $userEmail): array {
+    // Generate 6-digit code
+    $code = str_pad((string)random_int(100000, 999999), 6, '0', STR_PAD_LEFT);
+    
+    $result = $client->email()->sendOtp(
+        to: $userEmail,
+        from: "security@myapp.com",
+        code: $code,
+        appName: "MyApp",
+        expiresInMinutes: 10
+    );
+    
+    if ($result['success'] ?? false) {
+        echo "OTP sent! Tracking: " . $result['trackingId'] . "\n";
+        return ['success' => true, 'code' => $code];
+    }
+    
+    return ['success' => false, 'error' => $result['error'] ?? 'Unknown error'];
+}
+
+/**
+ * Send OTP with custom branded template
+ */
+function sendBrandedOtp(MetiganClient $client, string $userEmail, string $templateId): array {
+    $code = str_pad((string)random_int(100000, 999999), 6, '0', STR_PAD_LEFT);
+    
+    $result = $client->email()->sendOtp(
+        to: $userEmail,
+        from: "security@myapp.com",
+        code: $code,
+        appName: "MyApp",
+        expiresInMinutes: 5,
+        templateId: $templateId  // Custom branded template
+    );
+    
+    return $result;
+}
+
+// Usage
+$result = sendVerificationCode($client, "user@example.com");`}
+        />
+      </section>
+
+      <section className="space-y-6">
+        <h2 className="text-3xl font-bold tracking-tight scroll-mt-20">Transactional Email (Fast Lane)</h2>
+        <p className="text-muted-foreground mb-4">
+          Send time-sensitive transactional emails like password resets, receipts, and confirmations.
+        </p>
+        <CodeBlock
+          language="php"
+          fileName="transactional-example.php"
+          code={`<?php
+
+use Metigan\\MetiganClient;
+
+$client = new MetiganClient(getenv('METIGAN_API_KEY'));
+
+/**
+ * Send password reset email
+ */
+function sendPasswordReset(MetiganClient $client, string $userEmail, string $resetLink): array {
+    $result = $client->email()->sendTransactional(
+        to: $userEmail,
+        from: "security@myapp.com",
+        subject: "Reset Your Password",
+        content: "
+            <h1>Password Reset</h1>
+            <p>Click the link below to reset your password:</p>
+            <a href='{$resetLink}' style='padding: 12px 24px; background: #2563eb; 
+               color: white; text-decoration: none; border-radius: 8px; display: inline-block;'>
+                Reset Password
+            </a>
+            <p style='color: #666; margin-top: 20px;'>This link expires in 1 hour.</p>
+        "
+    );
+    
+    return $result;
+}
+
+/**
+ * Send order confirmation email
+ */
+function sendOrderConfirmation(MetiganClient $client, array $order): array {
+    $result = $client->email()->sendTransactional(
+        to: $order['customerEmail'],
+        from: "orders@myshop.com",
+        subject: "Order Confirmed #{$order['id']}",
+        content: "
+            <h1>Thank you for your order!</h1>
+            <p>Order #{$order['id']} has been confirmed.</p>
+            <p><strong>Total:</strong> $" . number_format($order['total'], 2) . "</p>
+            <a href='https://myshop.com/orders/{$order['id']}'>Track Your Order</a>
+        "
+    );
+    
+    return $result;
+}
+
+/**
+ * Send payment receipt
+ */
+function sendPaymentReceipt(MetiganClient $client, array $payment): array {
+    $amount = number_format($payment['amount'], 2);
+    
+    $result = $client->email()->sendTransactional(
+        to: $payment['customerEmail'],
+        from: "billing@myservice.com",
+        subject: "Payment Receipt - {$payment['currency']} {$amount}",
+        content: "
+            <h1>Payment Receipt</h1>
+            <p>Thank you for your payment.</p>
+            <div style='background: #f5f5f5; padding: 20px; border-radius: 8px;'>
+                <p><strong>Amount:</strong> {$payment['currency']} {$amount}</p>
+                <p><strong>Receipt ID:</strong> {$payment['id']}</p>
+                <p><strong>Date:</strong> {$payment['date']}</p>
+            </div>
+        "
+    );
+    
+    return $result;
+}
+
+// Usage examples
+$resetResult = sendPasswordReset($client, "user@example.com", "https://myapp.com/reset?token=abc123");
+
+$orderResult = sendOrderConfirmation($client, [
+    'id' => 'ORD-2024-001',
+    'customerEmail' => 'customer@example.com',
+    'total' => 99.99
+]);`}
+        />
+
+      <section className="space-y-6">
         <h2 className="text-3xl font-bold tracking-tight scroll-mt-20">Managing Contacts</h2>
         
         <h3 className="text-2xl font-semibold mb-4">Create Contact</h3>

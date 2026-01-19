@@ -485,6 +485,54 @@ const result = await metigan.email.sendEmail({
         </p>
       </Callout>
 
+      {/* OTP Emails Section */}
+      <section className="space-y-6 mt-12">
+        <h2 className="text-3xl font-bold tracking-tight scroll-mt-20">OTP Emails</h2>
+        <p className="text-muted-foreground leading-relaxed">
+          Send One-Time Password (OTP) verification emails using the dedicated <code className="px-1.5 py-0.5 rounded bg-muted text-sm font-mono">POST /api/otp</code> endpoint. 
+          OTP emails have priority delivery and built-in rate limiting.
+        </p>
+        
+        <CodeBlock
+          language="typescript"
+          fileName="send-otp.ts"
+          code={`import Metigan from 'metigan';
+
+const metigan = new Metigan({
+  apiKey: process.env.METIGAN_API_KEY!
+});
+
+// Send OTP with default template
+const result = await metigan.otp.send({
+  to: 'user@example.com',
+  from: 'auth@yourdomain.com',
+  code: '123456',
+  appName: 'MyApp',
+  expiresInMinutes: 5
+});
+
+// Send OTP with custom template
+const resultWithTemplate = await metigan.otp.send({
+  to: 'user@example.com',
+  from: 'auth@yourdomain.com',
+  code: '123456',
+  appName: 'MyApp',
+  expiresInMinutes: 5,
+  templateId: 'your-otp-template-id' // Optional: use custom template
+});`}
+        />
+        
+        <Callout variant="tip" title="OTP Template Variables">
+          <p>
+            When using a custom template, these variables are automatically replaced: 
+            <code className="px-1.5 py-0.5 rounded bg-muted text-sm font-mono mx-1">{"{{code}}"}</code>,
+            <code className="px-1.5 py-0.5 rounded bg-muted text-sm font-mono mx-1">{"{{appName}}"}</code>,
+            <code className="px-1.5 py-0.5 rounded bg-muted text-sm font-mono mx-1">{"{{expiresInMinutes}}"}</code>.
+            See the <Link href="/docs/guides/otp-emails" className="text-primary hover:underline font-medium">OTP Emails guide</Link> for more details.
+          </p>
+        </Callout>
+      </section>
+
       {/* Using Templates Section */}
       <div className="space-y-4 mt-12">
         <h2 className="text-2xl font-bold tracking-tight">Using Email Templates</h2>

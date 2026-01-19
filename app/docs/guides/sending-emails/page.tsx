@@ -13,6 +13,29 @@ export default function SendingEmailsGuidePage() {
         </p>
       </div>
 
+      {/* Related Guides */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold tracking-tight">Specialized Guides</h2>
+        <div className="grid gap-4 md:grid-cols-2">
+          <Link href="/docs/guides/otp-emails" className="block p-5 rounded-lg border hover:border-primary transition-colors bg-muted/30">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-2xl">🔐</span>
+              <h3 className="font-semibold">OTP Emails</h3>
+              <span className="px-1.5 py-0.5 text-xs font-medium rounded bg-primary/10 text-primary">New</span>
+            </div>
+            <p className="text-sm text-muted-foreground">Send verification codes with built-in rate limiting and template support</p>
+          </Link>
+          <Link href="/docs/guides/transactional-emails" className="block p-5 rounded-lg border hover:border-primary transition-colors bg-muted/30">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-2xl">⚡</span>
+              <h3 className="font-semibold">Transactional Emails</h3>
+              <span className="px-1.5 py-0.5 text-xs font-medium rounded bg-primary/10 text-primary">New</span>
+            </div>
+            <p className="text-sm text-muted-foreground">Welcome emails, password resets, order confirmations, and more</p>
+          </Link>
+        </div>
+      </section>
+
       <section className="space-y-6">
         <h2 className="text-3xl font-bold tracking-tight scroll-mt-20">Basic Email Sending</h2>
         <p className="text-muted-foreground leading-relaxed mb-6">

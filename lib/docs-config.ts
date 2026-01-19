@@ -11,7 +11,11 @@ import {
   Settings,
   Webhook,
   LayoutTemplate,
-  FormInput
+  FormInput,
+  ShieldCheck,
+  Zap,
+  Globe,
+  Server
 } from "lucide-react"
 
 export interface DocSection {
@@ -88,7 +92,56 @@ export const docsConfig: DocSection[] = [
     ],
   },
   {
-    title: "API Reference",
+    title: "REST API",
+    description: "Complete REST API reference for direct HTTP integration",
+    items: [
+      {
+        title: "REST API Overview",
+        href: "/docs/rest-api",
+        description: "Complete REST API reference",
+        icon: Globe,
+        badge: "New",
+      },
+      {
+        title: "Authentication",
+        href: "/docs/rest-api/authentication",
+        description: "API authentication methods",
+        icon: Key,
+      },
+      {
+        title: "Email Endpoints",
+        href: "/docs/rest-api/email",
+        description: "Send emails, OTP, and transactional",
+        icon: Mail,
+      },
+      {
+        title: "Contacts Endpoints",
+        href: "/docs/rest-api/contacts",
+        description: "CRUD operations for contacts",
+        icon: Users,
+      },
+      {
+        title: "Audiences Endpoints",
+        href: "/docs/rest-api/audiences",
+        description: "Manage audiences and lists",
+        icon: Target,
+      },
+      {
+        title: "Templates Endpoints",
+        href: "/docs/rest-api/templates",
+        description: "Email template management",
+        icon: LayoutTemplate,
+      },
+      {
+        title: "Forms Endpoints",
+        href: "/docs/rest-api/forms",
+        description: "Form submission and management",
+        icon: FormInput,
+      },
+    ],
+  },
+  {
+    title: "SDK Reference",
     items: [
       {
         title: "Email",
@@ -136,6 +189,20 @@ export const docsConfig: DocSection[] = [
         href: "/docs/guides/sending-emails",
         description: "Complete guide to sending emails",
         icon: Mail,
+      },
+      {
+        title: "OTP Emails",
+        href: "/docs/guides/otp-emails",
+        description: "Send verification codes with rate limiting",
+        icon: ShieldCheck,
+        badge: "New",
+      },
+      {
+        title: "Transactional Emails",
+        href: "/docs/guides/transactional-emails",
+        description: "Welcome, password reset, orders, and more",
+        icon: Zap,
+        badge: "New",
       },
       {
         title: "Contact Management",

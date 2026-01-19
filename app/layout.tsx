@@ -1,39 +1,48 @@
 ﻿import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import type { Metadata, Viewport } from "next"
+import { Inter, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { SonnerProvider } from "@/components/sonner-provider"
+import { cn } from "@/lib/utils"
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ 
+  subsets: ["latin"],
+  variable: "--font-sans",
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+})
 
 export const metadata: Metadata = {
   title: {
-    default: "Metigan SDK - Email API for Developers",
-    template: "%s | Metigan SDK"
+    default: "Metigan - Email for Developers",
+    template: "%s | Metigan"
   },
-  description: "Build powerful email solutions with Metigan SDK. Mass email delivery simplified for everyone. Support for Node.js, Python, PHP, Go, TypeScript, Angular, and NestJS.",
+  description: "The best way to reach humans instead of spam folders. Build powerful email solutions with Metigan. High deliverability email API for developers.",
   keywords: [
     "email API",
-    "email SDK",
-    "mass email",
+    "email for developers",
+    "transactional email",
     "email delivery",
     "email service",
-    "transactional email",
     "email marketing API",
-    "Node.js email",
-    "Python email",
-    "PHP email",
-    "Go email",
-    "TypeScript email",
-    "Angular email",
-    "NestJS email",
+    "SMTP API",
     "email infrastructure",
     "developer tools",
     "email automation",
+    "mass email",
+    "email SDK",
+    "Node.js email",
+    "Python email",
+    "React email",
+    "email templates",
+    "email deliverability",
     "Metigan"
   ],
-  authors: [{ name: "Metigan" }],
+  authors: [{ name: "Metigan", url: "https://metigan.com" }],
   creator: "Metigan",
   publisher: "Metigan",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://docs.metigan.com"),
@@ -44,22 +53,22 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "/",
-    title: "Metigan SDK - Email API for Developers",
-    description: "Build powerful email solutions with Metigan SDK. Mass email delivery simplified for everyone.",
-    siteName: "Metigan SDK",
+    title: "Metigan - Email for Developers",
+    description: "The best way to reach humans instead of spam folders. Build powerful email solutions with Metigan.",
+    siteName: "Metigan",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Metigan SDK - Email API for Developers",
+        alt: "Metigan - Email for Developers",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Metigan SDK - Email API for Developers",
-    description: "Build powerful email solutions with Metigan SDK. Mass email delivery simplified for everyone.",
+    title: "Metigan - Email for Developers",
+    description: "The best way to reach humans instead of spam folders. Build powerful email solutions with Metigan.",
     images: ["/og-image.png"],
     creator: "@metigan",
   },
@@ -74,9 +83,21 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION,
   },
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#000000",
 }
 
 export default function RootLayout({
@@ -85,9 +106,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+    <html lang="en" suppressHydrationWarning className={cn(inter.variable, jetbrainsMono.variable)}>
+      <body className={cn("min-h-screen bg-background font-sans antialiased", inter.className)}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} forcedTheme="dark">
           {children}
           <SonnerProvider />
         </ThemeProvider>
