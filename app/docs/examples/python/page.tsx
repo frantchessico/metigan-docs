@@ -201,7 +201,7 @@ def send_order_confirmation(order: dict) -> dict:
         content=f"""
             <h1>Thank you for your order!</h1>
             <p>Order #{order['id']} has been confirmed.</p>
-            <p><strong>Total:</strong> ${order['total']:.2f}</p>
+            <p><strong>Total:</strong> $""" + f"""{order['total']:.2f}</p>
             <a href="https://myshop.com/orders/{order['id']}">Track Your Order</a>
         """
     )
@@ -225,6 +225,7 @@ def send_payment_receipt(payment: dict) -> dict:
     )
     return result`}
         />
+      </section>
 
       <section className="space-y-6">
         <h2 className="text-3xl font-bold tracking-tight scroll-mt-20">Contact Management</h2>

@@ -282,6 +282,7 @@ $orderResult = sendOrderConfirmation($client, [
     'total' => 99.99
 ]);`}
         />
+      </section>
 
       <section className="space-y-6">
         <h2 className="text-3xl font-bold tracking-tight scroll-mt-20">Managing Contacts</h2>
