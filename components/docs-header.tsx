@@ -3,10 +3,10 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Search, Menu, X } from "lucide-react"
+import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { Input } from "@/components/ui/input"
+import { DocsSearch } from "@/components/docs-search"
 import {
   Sheet,
   SheetContent,
@@ -18,7 +18,6 @@ import { docsConfig } from "@/lib/docs-config"
 import { cn } from "@/lib/utils"
 
 export function DocsHeader() {
-  const [searchQuery, setSearchQuery] = React.useState("")
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
   const pathname = usePathname()
 
@@ -81,21 +80,7 @@ export function DocsHeader() {
 
         {/* Search Bar - Desktop */}
         <div className="hidden md:flex flex-1 items-center justify-center max-w-md mx-8">
-          <div className="relative w-full">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground pointer-events-none" />
-            <Input
-              type="search"
-              placeholder="Search documentation..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 h-9 bg-muted/50 border-muted focus:bg-[#000000]"
-            />
-            {searchQuery && (
-              <kbd className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
-                <span className="text-xs">⌘</span>K
-              </kbd>
-            )}
-          </div>
+          <DocsSearch />
         </div>
 
         {/* Actions */}
