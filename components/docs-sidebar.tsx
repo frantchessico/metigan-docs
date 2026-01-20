@@ -13,8 +13,8 @@ export function DocsSidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className="hidden md:block w-64 border-r bg-[#000000] shrink-0">
-      <ScrollArea className="h-[calc(100vh-4rem)]">
+    <aside className="hidden md:block w-64 border-r bg-[#000000] shrink-0 sticky top-16 h-[calc(100vh-4rem)] self-start">
+      <ScrollArea className="h-full">
         <div className="space-y-6 p-6">
           {/* Logo Section */}
           <div className="mb-6">
