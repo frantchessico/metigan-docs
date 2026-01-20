@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Bot, Send, Sparkles, User, Loader2, Copy, Check } from "lucide-react"
+import { Bot, Send, Sparkles, User, Loader2, Copy, Check, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -67,15 +67,15 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
   }
 
   return (
-    <div className="relative group my-3 rounded-lg overflow-hidden border border-white/10 bg-transparent">
+    <div className="relative group my-3 rounded-lg overflow-hidden border border-border/50 bg-muted/30">
       {/* Header */}
-      <div className="flex items-center justify-between px-3 py-1.5 bg-white/5 border-b border-white/10">
-        <span className="text-[10px] sm:text-xs text-slate-400 font-mono uppercase tracking-wider">
+      <div className="flex items-center justify-between px-3 py-1.5 bg-muted/50 border-b border-border/50">
+        <span className="text-[10px] sm:text-xs text-muted-foreground font-mono uppercase tracking-wider">
           {language || "code"}
         </span>
         <button
           onClick={copyCode}
-          className="flex items-center gap-1 text-[10px] sm:text-xs text-slate-400 hover:text-white transition-colors"
+          className="flex items-center gap-1 text-[10px] sm:text-xs text-muted-foreground hover:text-foreground transition-colors"
         >
           {copied ? (
             <>
@@ -92,7 +92,7 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
       </div>
       {/* Code */}
       <pre className="p-3 sm:p-4 overflow-x-auto text-xs sm:text-sm leading-relaxed bg-transparent">
-        <code ref={codeRef} className="font-mono text-slate-300">
+        <code ref={codeRef} className="font-mono text-foreground/90">
           {code}
         </code>
       </pre>
@@ -111,7 +111,7 @@ function formatText(text: string): React.ReactNode[] {
     // Handle headers
     if (line.startsWith("### ")) {
       result.push(
-        <h4 key={`h4-${lineIndex}`} className="text-sm font-semibold text-white mt-3 mb-1">
+        <h4 key={`h4-${lineIndex}`} className="text-sm font-semibold text-foreground mt-3 mb-1">
           {formatInline(line.slice(4))}
         </h4>
       )
@@ -119,7 +119,7 @@ function formatText(text: string): React.ReactNode[] {
     }
     if (line.startsWith("## ")) {
       result.push(
-        <h3 key={`h3-${lineIndex}`} className="text-base font-semibold text-white mt-4 mb-2">
+        <h3 key={`h3-${lineIndex}`} className="text-base font-semibold text-foreground mt-4 mb-2">
           {formatInline(line.slice(3))}
         </h3>
       )
@@ -127,7 +127,7 @@ function formatText(text: string): React.ReactNode[] {
     }
     if (line.startsWith("# ")) {
       result.push(
-        <h2 key={`h2-${lineIndex}`} className="text-lg font-bold text-white mt-4 mb-2">
+        <h2 key={`h2-${lineIndex}`} className="text-lg font-bold text-foreground mt-4 mb-2">
           {formatInline(line.slice(2))}
         </h2>
       )
@@ -138,7 +138,7 @@ function formatText(text: string): React.ReactNode[] {
     if (line.match(/^[-*]\s/)) {
       result.push(
         <div key={`li-${lineIndex}`} className="flex gap-2 ml-2 my-0.5">
-          <span className="text-purple-400 shrink-0">•</span>
+          <span className="text-primary shrink-0">•</span>
           <span>{formatInline(line.slice(2))}</span>
         </div>
       )
@@ -150,7 +150,7 @@ function formatText(text: string): React.ReactNode[] {
     if (numberedMatch) {
       result.push(
         <div key={`ol-${lineIndex}`} className="flex gap-2 ml-2 my-0.5">
-          <span className="text-purple-400 shrink-0 font-medium">{numberedMatch[1]}.</span>
+          <span className="text-primary shrink-0 font-medium">{numberedMatch[1]}.</span>
           <span>{formatInline(line.slice(numberedMatch[0].length))}</span>
         </div>
       )
@@ -184,7 +184,7 @@ function formatInline(text: string): React.ReactNode {
     const boldMatch = remaining.match(/^\*\*(.+?)\*\*/)
     if (boldMatch) {
       parts.push(
-        <strong key={key++} className="font-semibold text-white">
+        <strong key={key++} className="font-semibold text-foreground">
           {boldMatch[1]}
         </strong>
       )
@@ -196,7 +196,7 @@ function formatInline(text: string): React.ReactNode {
     const italicMatch = remaining.match(/^[*_]([^*_]+)[*_]/)
     if (italicMatch) {
       parts.push(
-        <em key={key++} className="italic text-slate-200">
+        <em key={key++} className="italic text-foreground/90">
           {italicMatch[1]}
         </em>
       )
@@ -210,7 +210,7 @@ function formatInline(text: string): React.ReactNode {
       parts.push(
         <code
           key={key++}
-          className="px-1.5 py-0.5 rounded bg-white/10 text-cyan-400 font-mono text-[0.85em]"
+          className="px-1.5 py-0.5 rounded bg-muted text-primary font-mono text-[0.85em]"
         >
           {codeMatch[1]}
         </code>
@@ -228,7 +228,7 @@ function formatInline(text: string): React.ReactNode {
           href={linkMatch[2]}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-purple-400 hover:text-purple-300 underline underline-offset-2"
+          className="text-primary hover:text-primary/80 underline underline-offset-2"
         >
           {linkMatch[1]}
         </a>
@@ -292,11 +292,11 @@ function MessageContent({ content }: { content: string }) {
   }, [content])
 
   if (parts.length === 0) {
-    return <div className="text-slate-300 leading-relaxed">{formatText(content)}</div>
+    return <div className="text-foreground/90 leading-relaxed">{formatText(content)}</div>
   }
 
   return (
-    <div className="text-slate-300 leading-relaxed">
+    <div className="text-foreground/90 leading-relaxed">
       {parts.map((part, index) => {
         if (part.type === "code") {
           return (
@@ -313,6 +313,9 @@ function MessageContent({ content }: { content: string }) {
   )
 }
 
+// Storage key for messages
+const STORAGE_KEY = "metigan-ai-chat-messages"
+
 export function AskAI() {
   const [open, setOpen] = React.useState(false)
   const [messages, setMessages] = React.useState<Message[]>([])
@@ -320,6 +323,30 @@ export function AskAI() {
   const [isLoading, setIsLoading] = React.useState(false)
   const scrollAreaRef = React.useRef<HTMLDivElement>(null)
   const inputRef = React.useRef<HTMLTextAreaElement>(null)
+
+  // Load messages from localStorage on mount
+  React.useEffect(() => {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY)
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        if (Array.isArray(parsed)) {
+          setMessages(parsed)
+        }
+      }
+    } catch (error) {
+      console.error("Failed to load chat history:", error)
+    }
+  }, [])
+
+  // Save messages to localStorage when they change
+  React.useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(messages))
+    } catch (error) {
+      console.error("Failed to save chat history:", error)
+    }
+  }, [messages])
 
   // Auto-scroll to bottom when new messages arrive
   React.useEffect(() => {
@@ -338,13 +365,10 @@ export function AskAI() {
     }
   }, [open])
 
-  // Clear messages when dialog closes
-  const handleOpenChange = (newOpen: boolean) => {
-    setOpen(newOpen)
-    if (!newOpen) {
-      setMessages([])
-      setInput("")
-    }
+  // Clear chat history
+  const clearChat = () => {
+    setMessages([])
+    localStorage.removeItem(STORAGE_KEY)
   }
 
   // Handle keyboard shortcut
@@ -446,7 +470,7 @@ export function AskAI() {
   }
 
   return (
-    <Dialog open={open} onOpenChange={handleOpenChange}>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
           variant="outline"
@@ -460,17 +484,30 @@ export function AskAI() {
           </kbd>
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-[95vw] max-w-[700px] h-[90vh] max-h-[700px] flex flex-col p-0 gap-0 bg-[#0a0a0a] border-white/10">
-        <DialogHeader className="px-4 sm:px-6 py-3 sm:py-4 border-b border-white/10 bg-[#0a0a0a] shrink-0">
-          <DialogTitle className="flex items-center gap-2 sm:gap-3">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
-              <Bot className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
-            </div>
-            <div>
-              <span className="text-base sm:text-lg font-semibold">Metigan AI</span>
-              <p className="text-[10px] sm:text-xs font-normal text-slate-400">Your documentation assistant</p>
-            </div>
-          </DialogTitle>
+      <DialogContent className="w-[95vw] max-w-[700px] h-[90vh] max-h-[700px] flex flex-col p-0 gap-0 bg-background border-border">
+        <DialogHeader className="px-4 sm:px-6 py-3 sm:py-4 border-b border-border bg-background shrink-0">
+          <div className="flex items-center justify-between">
+            <DialogTitle className="flex items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
+                <Bot className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+              </div>
+              <div>
+                <span className="text-base sm:text-lg font-semibold text-foreground">Metigan AI</span>
+                <p className="text-[10px] sm:text-xs font-normal text-muted-foreground">Your documentation assistant</p>
+              </div>
+            </DialogTitle>
+            {messages.length > 0 && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={clearChat}
+                className="text-muted-foreground hover:text-destructive gap-1.5"
+              >
+                <Trash2 className="h-4 w-4" />
+                <span className="hidden sm:inline text-xs">Clear</span>
+              </Button>
+            )}
+          </div>
         </DialogHeader>
 
         {/* Messages Area */}
@@ -481,8 +518,8 @@ export function AskAI() {
                 <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center mb-4 sm:mb-6 shadow-lg shadow-purple-500/10">
                   <Sparkles className="h-7 w-7 sm:h-10 sm:w-10 text-purple-400" />
                 </div>
-                <h3 className="font-semibold text-lg sm:text-xl mb-2 text-white">How can I help you?</h3>
-                <p className="text-xs sm:text-sm text-slate-400 max-w-sm mb-6 sm:mb-8 px-4">
+                <h3 className="font-semibold text-lg sm:text-xl mb-2 text-foreground">How can I help you?</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground max-w-sm mb-6 sm:mb-8 px-4">
                   Ask me anything about Metigan - API endpoints, SDKs, code examples, and more.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 w-full max-w-md px-2">
@@ -495,10 +532,10 @@ export function AskAI() {
                     <button
                       key={suggestion.text}
                       onClick={() => handleSuggestionClick(suggestion.text)}
-                      className="flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm rounded-lg sm:rounded-xl border border-white/10 bg-white/5 hover:border-purple-500/40 hover:bg-purple-500/10 transition-all text-left group"
+                      className="flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm rounded-lg sm:rounded-xl border border-border bg-muted/30 hover:border-purple-500/40 hover:bg-purple-500/10 transition-all text-left group"
                     >
                       <span className="text-base sm:text-lg">{suggestion.icon}</span>
-                      <span className="text-slate-300 group-hover:text-white transition-colors line-clamp-1">
+                      <span className="text-muted-foreground group-hover:text-foreground transition-colors line-clamp-1">
                         {suggestion.text}
                       </span>
                     </button>
@@ -524,11 +561,11 @@ export function AskAI() {
                       "rounded-xl sm:rounded-2xl max-w-[85%] sm:max-w-[80%] text-xs sm:text-sm",
                       message.role === "user"
                         ? "bg-gradient-to-r from-purple-500 to-blue-500 text-white px-3 sm:px-4 py-2 sm:py-3"
-                        : "bg-white/5 border border-white/10 px-3 sm:px-4 py-2 sm:py-3"
+                        : "bg-muted/50 border border-border px-3 sm:px-4 py-2 sm:py-3"
                     )}
                   >
                     {message.role === "assistant" && message.content === "" && isLoading ? (
-                      <div className="flex items-center gap-2 text-slate-400">
+                      <div className="flex items-center gap-2 text-muted-foreground">
                         <Loader2 className="h-3 w-3 sm:h-4 sm:w-4 animate-spin" />
                         <span className="text-xs sm:text-sm">Thinking...</span>
                       </div>
@@ -539,8 +576,8 @@ export function AskAI() {
                     )}
                   </div>
                   {message.role === "user" && (
-                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-md sm:rounded-lg bg-slate-700 flex items-center justify-center shrink-0">
-                      <User className="h-3 w-3 sm:h-4 sm:w-4 text-slate-300" />
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-md sm:rounded-lg bg-muted flex items-center justify-center shrink-0">
+                      <User className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
                     </div>
                   )}
                 </div>
@@ -550,7 +587,7 @@ export function AskAI() {
         </ScrollArea>
 
         {/* Input Area */}
-        <form onSubmit={onSubmit} className="border-t border-white/10 p-3 sm:p-4 bg-[#0a0a0a] shrink-0">
+        <form onSubmit={onSubmit} className="border-t border-border p-3 sm:p-4 bg-background shrink-0">
           <div className="flex gap-2 sm:gap-3">
             <textarea
               ref={inputRef}
@@ -559,7 +596,7 @@ export function AskAI() {
               onKeyDown={handleKeyDown}
               placeholder="Ask a question..."
               rows={1}
-              className="flex-1 resize-none rounded-lg sm:rounded-xl border border-white/10 bg-white/5 px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 min-h-[40px] sm:min-h-[48px] max-h-[100px] sm:max-h-[120px] placeholder:text-slate-500"
+              className="flex-1 resize-none rounded-lg sm:rounded-xl border border-border bg-muted/30 px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 min-h-[40px] sm:min-h-[48px] max-h-[100px] sm:max-h-[120px] placeholder:text-muted-foreground"
               disabled={isLoading}
             />
             <Button
@@ -575,7 +612,7 @@ export function AskAI() {
               )}
             </Button>
           </div>
-          <p className="text-[10px] sm:text-xs text-slate-500 mt-2 sm:mt-3 text-center">
+          <p className="text-[10px] sm:text-xs text-muted-foreground mt-2 sm:mt-3 text-center">
             AI can make mistakes. Verify important information.
           </p>
         </form>
