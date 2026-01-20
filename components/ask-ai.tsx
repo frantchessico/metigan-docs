@@ -67,37 +67,192 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
   }
 
   return (
-    <div className="relative group my-3 rounded-lg overflow-hidden border border-white/10 bg-[#0d1117]">
+    <div className="relative group my-3 rounded-lg overflow-hidden border border-white/10 bg-transparent">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-2 bg-[#161b22] border-b border-white/10">
-        <span className="text-xs text-slate-400 font-mono">
+      <div className="flex items-center justify-between px-3 py-1.5 bg-white/5 border-b border-white/10">
+        <span className="text-[10px] sm:text-xs text-slate-400 font-mono uppercase tracking-wider">
           {language || "code"}
         </span>
         <button
           onClick={copyCode}
-          className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors"
+          className="flex items-center gap-1 text-[10px] sm:text-xs text-slate-400 hover:text-white transition-colors"
         >
           {copied ? (
             <>
-              <Check className="w-3.5 h-3.5 text-green-500" />
-              <span>Copied!</span>
+              <Check className="w-3 h-3 text-green-500" />
+              <span className="hidden sm:inline">Copied!</span>
             </>
           ) : (
             <>
-              <Copy className="w-3.5 h-3.5" />
-              <span>Copy</span>
+              <Copy className="w-3 h-3" />
+              <span className="hidden sm:inline">Copy</span>
             </>
           )}
         </button>
       </div>
       {/* Code */}
-      <pre className="p-4 overflow-x-auto text-sm leading-relaxed">
+      <pre className="p-3 sm:p-4 overflow-x-auto text-xs sm:text-sm leading-relaxed bg-transparent">
         <code ref={codeRef} className="font-mono text-slate-300">
           {code}
         </code>
       </pre>
     </div>
   )
+}
+
+// Format text with markdown-like syntax
+function formatText(text: string): React.ReactNode[] {
+  const result: React.ReactNode[] = []
+  
+  // Split by lines first
+  const lines = text.split("\n")
+  
+  lines.forEach((line, lineIndex) => {
+    // Handle headers
+    if (line.startsWith("### ")) {
+      result.push(
+        <h4 key={`h4-${lineIndex}`} className="text-sm font-semibold text-white mt-3 mb-1">
+          {formatInline(line.slice(4))}
+        </h4>
+      )
+      return
+    }
+    if (line.startsWith("## ")) {
+      result.push(
+        <h3 key={`h3-${lineIndex}`} className="text-base font-semibold text-white mt-4 mb-2">
+          {formatInline(line.slice(3))}
+        </h3>
+      )
+      return
+    }
+    if (line.startsWith("# ")) {
+      result.push(
+        <h2 key={`h2-${lineIndex}`} className="text-lg font-bold text-white mt-4 mb-2">
+          {formatInline(line.slice(2))}
+        </h2>
+      )
+      return
+    }
+    
+    // Handle bullet points
+    if (line.match(/^[-*]\s/)) {
+      result.push(
+        <div key={`li-${lineIndex}`} className="flex gap-2 ml-2 my-0.5">
+          <span className="text-purple-400 shrink-0">•</span>
+          <span>{formatInline(line.slice(2))}</span>
+        </div>
+      )
+      return
+    }
+    
+    // Handle numbered lists
+    const numberedMatch = line.match(/^(\d+)\.\s/)
+    if (numberedMatch) {
+      result.push(
+        <div key={`ol-${lineIndex}`} className="flex gap-2 ml-2 my-0.5">
+          <span className="text-purple-400 shrink-0 font-medium">{numberedMatch[1]}.</span>
+          <span>{formatInline(line.slice(numberedMatch[0].length))}</span>
+        </div>
+      )
+      return
+    }
+    
+    // Regular text
+    if (line.trim()) {
+      result.push(
+        <p key={`p-${lineIndex}`} className="my-1">
+          {formatInline(line)}
+        </p>
+      )
+    } else if (lineIndex > 0 && lineIndex < lines.length - 1) {
+      // Empty line = paragraph break
+      result.push(<div key={`br-${lineIndex}`} className="h-2" />)
+    }
+  })
+  
+  return result
+}
+
+// Format inline elements (bold, italic, code, links)
+function formatInline(text: string): React.ReactNode {
+  const parts: React.ReactNode[] = []
+  let remaining = text
+  let key = 0
+  
+  while (remaining.length > 0) {
+    // Bold **text**
+    const boldMatch = remaining.match(/^\*\*(.+?)\*\*/)
+    if (boldMatch) {
+      parts.push(
+        <strong key={key++} className="font-semibold text-white">
+          {boldMatch[1]}
+        </strong>
+      )
+      remaining = remaining.slice(boldMatch[0].length)
+      continue
+    }
+    
+    // Italic *text* or _text_
+    const italicMatch = remaining.match(/^[*_]([^*_]+)[*_]/)
+    if (italicMatch) {
+      parts.push(
+        <em key={key++} className="italic text-slate-200">
+          {italicMatch[1]}
+        </em>
+      )
+      remaining = remaining.slice(italicMatch[0].length)
+      continue
+    }
+    
+    // Inline code `code`
+    const codeMatch = remaining.match(/^`([^`]+)`/)
+    if (codeMatch) {
+      parts.push(
+        <code
+          key={key++}
+          className="px-1.5 py-0.5 rounded bg-white/10 text-cyan-400 font-mono text-[0.85em]"
+        >
+          {codeMatch[1]}
+        </code>
+      )
+      remaining = remaining.slice(codeMatch[0].length)
+      continue
+    }
+    
+    // Links [text](url)
+    const linkMatch = remaining.match(/^\[([^\]]+)\]\(([^)]+)\)/)
+    if (linkMatch) {
+      parts.push(
+        <a
+          key={key++}
+          href={linkMatch[2]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-purple-400 hover:text-purple-300 underline underline-offset-2"
+        >
+          {linkMatch[1]}
+        </a>
+      )
+      remaining = remaining.slice(linkMatch[0].length)
+      continue
+    }
+    
+    // Find next special character
+    const nextSpecial = remaining.search(/[*_`\[]/)
+    if (nextSpecial === -1) {
+      parts.push(<span key={key++}>{remaining}</span>)
+      break
+    } else if (nextSpecial === 0) {
+      // Special char at start but didn't match pattern, treat as regular text
+      parts.push(<span key={key++}>{remaining[0]}</span>)
+      remaining = remaining.slice(1)
+    } else {
+      parts.push(<span key={key++}>{remaining.slice(0, nextSpecial)}</span>)
+      remaining = remaining.slice(nextSpecial)
+    }
+  }
+  
+  return parts.length === 1 ? parts[0] : <>{parts}</>
 }
 
 // Parse markdown-like content into components
@@ -137,11 +292,11 @@ function MessageContent({ content }: { content: string }) {
   }, [content])
 
   if (parts.length === 0) {
-    return <span className="whitespace-pre-wrap">{content}</span>
+    return <div className="text-slate-300 leading-relaxed">{formatText(content)}</div>
   }
 
   return (
-    <>
+    <div className="text-slate-300 leading-relaxed">
       {parts.map((part, index) => {
         if (part.type === "code") {
           return (
@@ -152,55 +307,9 @@ function MessageContent({ content }: { content: string }) {
             />
           )
         }
-        return (
-          <div key={index} className="whitespace-pre-wrap leading-relaxed">
-            {part.content.split("\n").map((line, lineIndex) => {
-              // Handle inline code
-              const inlineCodeRegex = /`([^`]+)`/g
-              const parts = []
-              let lastIdx = 0
-              let inlineMatch
-
-              while ((inlineMatch = inlineCodeRegex.exec(line)) !== null) {
-                if (inlineMatch.index > lastIdx) {
-                  parts.push(
-                    <span key={`text-${lineIndex}-${lastIdx}`}>
-                      {line.slice(lastIdx, inlineMatch.index)}
-                    </span>
-                  )
-                }
-                parts.push(
-                  <code
-                    key={`code-${lineIndex}-${inlineMatch.index}`}
-                    className="px-1.5 py-0.5 rounded bg-slate-800 text-cyan-400 font-mono text-xs"
-                  >
-                    {inlineMatch[1]}
-                  </code>
-                )
-                lastIdx = inlineMatch.index + inlineMatch[0].length
-              }
-
-              if (lastIdx < line.length) {
-                parts.push(
-                  <span key={`text-${lineIndex}-end`}>{line.slice(lastIdx)}</span>
-                )
-              }
-
-              if (parts.length === 0) {
-                parts.push(<span key={`line-${lineIndex}`}>{line}</span>)
-              }
-
-              return (
-                <React.Fragment key={lineIndex}>
-                  {parts}
-                  {lineIndex < part.content.split("\n").length - 1 && <br />}
-                </React.Fragment>
-              )
-            })}
-          </div>
-        )
+        return <div key={index}>{formatText(part.content)}</div>
       })}
-    </>
+    </div>
   )
 }
 
@@ -342,41 +451,41 @@ export function AskAI() {
         <Button
           variant="outline"
           size="sm"
-          className="gap-2 bg-gradient-to-r from-purple-500/10 to-blue-500/10 border-purple-500/20 hover:border-purple-500/40 hover:bg-gradient-to-r hover:from-purple-500/20 hover:to-blue-500/20"
+          className="gap-1.5 sm:gap-2 bg-gradient-to-r from-purple-500/10 to-blue-500/10 border-purple-500/20 hover:border-purple-500/40 hover:bg-gradient-to-r hover:from-purple-500/20 hover:to-blue-500/20 px-2 sm:px-3"
         >
           <Sparkles className="h-4 w-4 text-purple-400" />
-          <span className="hidden sm:inline">Ask AI</span>
-          <kbd className="hidden md:inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium">
+          <span className="hidden sm:inline text-xs sm:text-sm">Ask AI</span>
+          <kbd className="hidden lg:inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium">
             <span className="text-xs">⌘</span>I
           </kbd>
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[700px] h-[700px] flex flex-col p-0 gap-0 bg-[#0a0a0a] border-white/10">
-        <DialogHeader className="px-6 py-4 border-b border-white/10 bg-[#0a0a0a]">
-          <DialogTitle className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
-              <Bot className="h-5 w-5 text-white" />
+      <DialogContent className="w-[95vw] max-w-[700px] h-[90vh] max-h-[700px] flex flex-col p-0 gap-0 bg-[#0a0a0a] border-white/10">
+        <DialogHeader className="px-4 sm:px-6 py-3 sm:py-4 border-b border-white/10 bg-[#0a0a0a] shrink-0">
+          <DialogTitle className="flex items-center gap-2 sm:gap-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
+              <Bot className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
             </div>
             <div>
-              <span className="text-lg font-semibold">Metigan AI</span>
-              <p className="text-xs font-normal text-slate-400">Your documentation assistant</p>
+              <span className="text-base sm:text-lg font-semibold">Metigan AI</span>
+              <p className="text-[10px] sm:text-xs font-normal text-slate-400">Your documentation assistant</p>
             </div>
           </DialogTitle>
         </DialogHeader>
 
         {/* Messages Area */}
-        <ScrollArea className="flex-1" ref={scrollAreaRef}>
-          <div className="px-6 py-4 space-y-6">
+        <ScrollArea className="flex-1 min-h-0" ref={scrollAreaRef}>
+          <div className="px-4 sm:px-6 py-4 space-y-4 sm:space-y-6">
             {messages.length === 0 ? (
-              <div className="flex flex-col items-center justify-center h-[450px] text-center">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center mb-6 shadow-lg shadow-purple-500/10">
-                  <Sparkles className="h-10 w-10 text-purple-400" />
+              <div className="flex flex-col items-center justify-center min-h-[300px] sm:min-h-[400px] text-center py-8">
+                <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center mb-4 sm:mb-6 shadow-lg shadow-purple-500/10">
+                  <Sparkles className="h-7 w-7 sm:h-10 sm:w-10 text-purple-400" />
                 </div>
-                <h3 className="font-semibold text-xl mb-2 text-white">How can I help you?</h3>
-                <p className="text-sm text-slate-400 max-w-sm mb-8">
+                <h3 className="font-semibold text-lg sm:text-xl mb-2 text-white">How can I help you?</h3>
+                <p className="text-xs sm:text-sm text-slate-400 max-w-sm mb-6 sm:mb-8 px-4">
                   Ask me anything about Metigan - API endpoints, SDKs, code examples, and more.
                 </p>
-                <div className="grid grid-cols-2 gap-3 w-full max-w-md">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 w-full max-w-md px-2">
                   {[
                     { text: "How do I send an email?", icon: "📧" },
                     { text: "Show me a Python example", icon: "🐍" },
@@ -386,10 +495,10 @@ export function AskAI() {
                     <button
                       key={suggestion.text}
                       onClick={() => handleSuggestionClick(suggestion.text)}
-                      className="flex items-center gap-2 px-4 py-3 text-sm rounded-xl border border-white/10 bg-white/5 hover:border-purple-500/40 hover:bg-purple-500/10 transition-all text-left group"
+                      className="flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm rounded-lg sm:rounded-xl border border-white/10 bg-white/5 hover:border-purple-500/40 hover:bg-purple-500/10 transition-all text-left group"
                     >
-                      <span className="text-lg">{suggestion.icon}</span>
-                      <span className="text-slate-300 group-hover:text-white transition-colors">
+                      <span className="text-base sm:text-lg">{suggestion.icon}</span>
+                      <span className="text-slate-300 group-hover:text-white transition-colors line-clamp-1">
                         {suggestion.text}
                       </span>
                     </button>
@@ -401,35 +510,37 @@ export function AskAI() {
                 <div
                   key={message.id}
                   className={cn(
-                    "flex gap-4",
+                    "flex gap-2 sm:gap-4",
                     message.role === "user" ? "justify-end" : "justify-start"
                   )}
                 >
                   {message.role === "assistant" && (
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center shrink-0 shadow-lg shadow-purple-500/20">
-                      <Bot className="h-4 w-4 text-white" />
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-md sm:rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center shrink-0 shadow-lg shadow-purple-500/20">
+                      <Bot className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
                     </div>
                   )}
                   <div
                     className={cn(
-                      "rounded-2xl max-w-[85%] text-sm",
+                      "rounded-xl sm:rounded-2xl max-w-[85%] sm:max-w-[80%] text-xs sm:text-sm",
                       message.role === "user"
-                        ? "bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-3"
-                        : "bg-white/5 border border-white/10 px-4 py-3"
+                        ? "bg-gradient-to-r from-purple-500 to-blue-500 text-white px-3 sm:px-4 py-2 sm:py-3"
+                        : "bg-white/5 border border-white/10 px-3 sm:px-4 py-2 sm:py-3"
                     )}
                   >
                     {message.role === "assistant" && message.content === "" && isLoading ? (
                       <div className="flex items-center gap-2 text-slate-400">
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                        <span className="text-sm">Thinking...</span>
+                        <Loader2 className="h-3 w-3 sm:h-4 sm:w-4 animate-spin" />
+                        <span className="text-xs sm:text-sm">Thinking...</span>
                       </div>
+                    ) : message.role === "user" ? (
+                      <span className="whitespace-pre-wrap">{message.content}</span>
                     ) : (
                       <MessageContent content={message.content} />
                     )}
                   </div>
                   {message.role === "user" && (
-                    <div className="w-8 h-8 rounded-lg bg-slate-700 flex items-center justify-center shrink-0">
-                      <User className="h-4 w-4 text-slate-300" />
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-md sm:rounded-lg bg-slate-700 flex items-center justify-center shrink-0">
+                      <User className="h-3 w-3 sm:h-4 sm:w-4 text-slate-300" />
                     </div>
                   )}
                 </div>
@@ -439,33 +550,33 @@ export function AskAI() {
         </ScrollArea>
 
         {/* Input Area */}
-        <form onSubmit={onSubmit} className="border-t border-white/10 p-4 bg-[#0a0a0a]">
-          <div className="flex gap-3">
+        <form onSubmit={onSubmit} className="border-t border-white/10 p-3 sm:p-4 bg-[#0a0a0a] shrink-0">
+          <div className="flex gap-2 sm:gap-3">
             <textarea
               ref={inputRef}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Ask a question about Metigan..."
+              placeholder="Ask a question..."
               rows={1}
-              className="flex-1 resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 min-h-[48px] max-h-[120px] placeholder:text-slate-500"
+              className="flex-1 resize-none rounded-lg sm:rounded-xl border border-white/10 bg-white/5 px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 min-h-[40px] sm:min-h-[48px] max-h-[100px] sm:max-h-[120px] placeholder:text-slate-500"
               disabled={isLoading}
             />
             <Button
               type="submit"
               size="icon"
               disabled={isLoading || !input.trim()}
-              className="h-12 w-12 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 shadow-lg shadow-purple-500/20 disabled:opacity-50 disabled:shadow-none"
+              className="h-10 w-10 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 shadow-lg shadow-purple-500/20 disabled:opacity-50 disabled:shadow-none"
             >
               {isLoading ? (
-                <Loader2 className="h-5 w-5 animate-spin" />
+                <Loader2 className="h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
               ) : (
-                <Send className="h-5 w-5" />
+                <Send className="h-4 w-4 sm:h-5 sm:w-5" />
               )}
             </Button>
           </div>
-          <p className="text-xs text-slate-500 mt-3 text-center">
-            Metigan AI can make mistakes. Always verify important information in the docs.
+          <p className="text-[10px] sm:text-xs text-slate-500 mt-2 sm:mt-3 text-center">
+            AI can make mistakes. Verify important information.
           </p>
         </form>
       </DialogContent>
