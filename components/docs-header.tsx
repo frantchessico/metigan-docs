@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -70,10 +71,15 @@ export function DocsHeader() {
             </SheetContent>
           </Sheet>
 
-          <Link href="/" className="flex items-center space-x-2 group">
-            <span className="text-xl font-bold">
-              Metigan
-            </span>
+          <Link href="/" className="flex items-center space-x-1 group">
+            <Image
+              src="https://res.cloudinary.com/dwsk5thfo/image/upload/v1741872069/l0vobcpkkk2koni3rq8g.svg"
+              alt="Metigan Logo"
+              width={32}
+              height={32}
+              className="h-7 w-auto"
+            />
+            <span className="text-xl font-bold">metigan</span>
             <span className="text-sm font-medium text-muted-foreground hidden sm:inline">Docs</span>
           </Link>
         </div>

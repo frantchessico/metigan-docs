@@ -573,11 +573,15 @@ function Footer() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8">
           {/* Brand */}
           <div className="col-span-2 sm:col-span-3 lg:col-span-1 mb-4 lg:mb-0">
-            <Link href="/" className="flex items-center gap-2 mb-3 sm:mb-4">
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white font-bold text-xs sm:text-sm">
-                M
-              </div>
-              <span className="font-semibold text-base sm:text-lg">Metigan</span>
+            <Link href="/" className="flex items-center gap-1 mb-3 sm:mb-4">
+              <Image
+                src="https://res.cloudinary.com/dwsk5thfo/image/upload/v1741872069/l0vobcpkkk2koni3rq8g.svg"
+                alt="Metigan Logo"
+                width={32}
+                height={32}
+                className="h-7 w-auto sm:h-8"
+              />
+              <span className="font-semibold text-base sm:text-lg">metigan</span>
             </Link>
             <p className="text-xs sm:text-sm text-muted-foreground">
               Email for developers.
@@ -615,7 +619,7 @@ function Footer() {
               <Github className="w-5 h-5" />
             </Link>
             <Link 
-              href="https://twitter.com/metigan" 
+              href="https://x.com/metiganemail" 
               target="_blank"
               className="text-muted-foreground hover:text-white transition-colors"
             >
@@ -701,11 +705,15 @@ export default function Home() {
         <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-black/80 backdrop-blur-xl">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16">
             <div className="flex items-center justify-between h-14 sm:h-16">
-              <Link href="/" className="flex items-center gap-2">
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white font-bold text-xs sm:text-sm">
-                  M
-                </div>
-                <span className="font-semibold text-base sm:text-lg">Metigan</span>
+              <Link href="/" className="flex items-center gap-1">
+                <Image
+                  src="https://res.cloudinary.com/dwsk5thfo/image/upload/v1741872069/l0vobcpkkk2koni3rq8g.svg"
+                  alt="Metigan Logo"
+                  width={32}
+                  height={32}
+                  className="h-7 w-auto sm:h-8"
+                />
+                <span className="font-semibold text-base sm:text-lg">metigan</span>
               </Link>
               
               <div className="hidden lg:flex items-center gap-8">
