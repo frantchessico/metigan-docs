@@ -20,15 +20,11 @@ import { cn } from "@/lib/utils"
 // ============================================================================
 
 const companies = [
-  { name: "Quicker", logo: "Q" },
-  { name: "Friends", logo: "F" },
-  { name: "Cal.com", logo: "C" },
-  { name: "Loops", logo: "L" },
-  { name: "Clerk", logo: "C" },
-  { name: "Vercel", logo: "V" },
-  { name: "Dub", logo: "D" },
-  { name: "Checkly", logo: "C" },
-  { name: "Attio", logo: "A" },
+  { name: "SavanaPoint", logo: "S" },
+  { name: "Waza Cursos", logo: "W" },
+  { name: "Confirmado.pro", logo: "C" },
+  { name: "Oito", logo: "O" },
+  { name: "Flyone", logo: "F" },
 ]
 
 const languages = [
@@ -554,16 +550,16 @@ function Testimonial() {
           </div>
           
           <blockquote className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed text-white/90">
-            &ldquo;Metigan has transformed how we handle email. The API is clean, 
-            deliverability is excellent, and our team can now focus on building 
-            features instead of fighting with email infrastructure.&rdquo;
+            &ldquo;O Metigan transformou a forma como lidamos com email. A API é limpa, 
+            a entregabilidade é excelente, e a nossa equipe agora pode focar em construir 
+            features ao invés de lutar com infraestrutura de email.&rdquo;
           </blockquote>
           
           <div className="flex items-center justify-center gap-3 sm:gap-4">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500" />
             <div className="text-left">
-              <p className="font-medium text-sm sm:text-base">Sarah Chen</p>
-              <p className="text-xs sm:text-sm text-muted-foreground">CTO at TechStartup</p>
+              <p className="font-medium text-sm sm:text-base">Gamito Fulano</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">Founder at SavanaPoint</p>
             </div>
           </div>
         </div>
