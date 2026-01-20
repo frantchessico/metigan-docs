@@ -5,7 +5,6 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { DocsSearch } from "@/components/docs-search"
 import { AskAI } from "@/components/ask-ai"
 import {
@@ -87,7 +86,6 @@ export function DocsHeader() {
         {/* Actions */}
         <div className="flex items-center space-x-2">
           <AskAI />
-          <ThemeToggle />
           <Link href="https://app.metigan.com" className="hidden sm:inline-block">
             <Button 
               variant="outline" 
