@@ -1,8 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { useChat } from "ai/react"
-import { Bot, Send, X, Sparkles, User, Loader2 } from "lucide-react"
+import { Bot, Send, Sparkles, User, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -14,14 +13,19 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { cn } from "@/lib/utils"
 
+interface Message {
+  id: string
+  role: "user" | "assistant"
+  content: string
+}
+
 export function AskAI() {
   const [open, setOpen] = React.useState(false)
+  const [messages, setMessages] = React.useState<Message[]>([])
+  const [input, setInput] = React.useState("")
+  const [isLoading, setIsLoading] = React.useState(false)
   const scrollAreaRef = React.useRef<HTMLDivElement>(null)
   const inputRef = React.useRef<HTMLTextAreaElement>(null)
-
-  const { messages, input, handleInputChange, handleSubmit, isLoading, setMessages } = useChat({
-    api: "/api/chat",
-  })
 
   // Auto-scroll to bottom when new messages arrive
   React.useEffect(() => {
@@ -42,6 +46,7 @@ export function AskAI() {
     setOpen(newOpen)
     if (!newOpen) {
       setMessages([])
+      setInput("")
     }
   }
 
@@ -57,18 +62,90 @@ export function AskAI() {
     return () => document.removeEventListener("keydown", down)
   }, [])
 
+  const sendMessage = async (messageText: string) => {
+    if (!messageText.trim() || isLoading) return
+
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      role: "user",
+      content: messageText.trim(),
+    }
+
+    setMessages((prev) => [...prev, userMessage])
+    setInput("")
+    setIsLoading(true)
+
+    const assistantMessage: Message = {
+      id: (Date.now() + 1).toString(),
+      role: "assistant",
+      content: "",
+    }
+    setMessages((prev) => [...prev, assistantMessage])
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: [...messages, userMessage].map((m) => ({
+            role: m.role,
+            content: m.content,
+          })),
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to get response")
+      }
+
+      const reader = response.body?.getReader()
+      const decoder = new TextDecoder()
+
+      if (reader) {
+        let content = ""
+        while (true) {
+          const { done, value } = await reader.read()
+          if (done) break
+          
+          content += decoder.decode(value, { stream: true })
+          setMessages((prev) =>
+            prev.map((m) =>
+              m.id === assistantMessage.id ? { ...m, content } : m
+            )
+          )
+        }
+      }
+    } catch (error) {
+      console.error("Error:", error)
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.id === assistantMessage.id
+            ? { ...m, content: "Sorry, I encountered an error. Please try again." }
+            : m
+        )
+      )
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (!input.trim()) return
-    handleSubmit(e)
+    sendMessage(input)
   }
 
   // Handle Enter key (submit on Enter, new line on Shift+Enter)
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
-      onSubmit(e)
+      sendMessage(input)
     }
+  }
+
+  const handleSuggestionClick = (suggestion: string) => {
+    sendMessage(suggestion)
   }
 
   return (
@@ -120,19 +197,7 @@ export function AskAI() {
                   ].map((suggestion) => (
                     <button
                       key={suggestion}
-                      onClick={() => {
-                        const syntheticEvent = {
-                          target: { value: suggestion },
-                        } as React.ChangeEvent<HTMLTextAreaElement>
-                        handleInputChange(syntheticEvent)
-                        setTimeout(() => {
-                          const formEvent = new Event("submit", { bubbles: true })
-                          const form = document.querySelector("form")
-                          if (form) {
-                            handleSubmit(formEvent as unknown as React.FormEvent)
-                          }
-                        }, 100)
-                      }}
+                      onClick={() => handleSuggestionClick(suggestion)}
                       className="px-3 py-1.5 text-xs rounded-full border border-muted-foreground/20 hover:border-purple-500/40 hover:bg-purple-500/10 transition-colors"
                     >
                       {suggestion}
@@ -162,22 +227,13 @@ export function AskAI() {
                         : "bg-muted"
                     )}
                   >
-                    <div className="prose prose-sm dark:prose-invert prose-p:leading-relaxed prose-pre:bg-black/50 prose-pre:border prose-code:text-xs max-w-none">
-                      {message.content.split("```").map((part, index) => {
-                        if (index % 2 === 0) {
-                          return <p key={index} className="whitespace-pre-wrap m-0">{part}</p>
-                        } else {
-                          const [lang, ...code] = part.split("\n")
-                          return (
-                            <pre key={index} className="rounded-lg overflow-x-auto my-2">
-                              <code className={`language-${lang || "text"}`}>
-                                {code.join("\n")}
-                              </code>
-                            </pre>
-                          )
-                        }
-                      })}
-                    </div>
+                    {message.role === "assistant" && message.content === "" && isLoading ? (
+                      <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+                    ) : (
+                      <div className="prose prose-sm dark:prose-invert prose-p:leading-relaxed prose-pre:bg-black/50 prose-pre:border prose-code:text-xs max-w-none whitespace-pre-wrap">
+                        {message.content}
+                      </div>
+                    )}
                   </div>
                   {message.role === "user" && (
                     <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center shrink-0">
@@ -186,16 +242,6 @@ export function AskAI() {
                   )}
                 </div>
               ))
-            )}
-            {isLoading && (
-              <div className="flex gap-3">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center shrink-0">
-                  <Bot className="h-4 w-4 text-white" />
-                </div>
-                <div className="rounded-2xl px-4 py-2.5 bg-muted">
-                  <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
-                </div>
-              </div>
             )}
           </div>
         </ScrollArea>
@@ -206,7 +252,7 @@ export function AskAI() {
             <textarea
               ref={inputRef}
               value={input}
-              onChange={handleInputChange}
+              onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Ask a question..."
               rows={1}
