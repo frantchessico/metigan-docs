@@ -166,12 +166,7 @@ const deliverabilityFeatures = [
   },
 ]
 
-const stats = [
-  { value: "99.9%", label: "Uptime SLA" },
-  { value: "388K+", label: "Emails sent" },
-  { value: "<1s", label: "Avg. delivery time" },
-  { value: "98%", label: "Inbox placement" },
-]
+// Stats será gerado dinamicamente no componente Home
 
 const footerLinks = {
   Product: [
@@ -644,7 +639,40 @@ function Footer() {
 // MAIN PAGE
 // ============================================================================
 
+// Função para formatar número de emails
+function formatEmailCount(count: number): string {
+  if (count >= 1000000) {
+    return `${(count / 1000000).toFixed(1)}M+`
+  } else if (count >= 1000) {
+    return `${Math.floor(count / 1000)}K+`
+  }
+  return count.toString()
+}
+
 export default function Home() {
+  const [emailsSent, setEmailsSent] = useState<number | null>(null)
+
+  useEffect(() => {
+    async function fetchEmailCount() {
+      try {
+        const response = await fetch('https://savanapoint-metigan.kwbhel.easypanel.host/api/public/emails/sent-count')
+        const data = await response.json()
+        setEmailsSent(data.totalSent)
+      } catch (error) {
+        console.error('Failed to fetch email count:', error)
+        setEmailsSent(388846) // Fallback value
+      }
+    }
+    fetchEmailCount()
+  }, [])
+
+  const stats = [
+    { value: "99.9%", label: "Uptime SLA" },
+    { value: emailsSent ? formatEmailCount(emailsSent) : "388K+", label: "Emails sent" },
+    { value: "<1s", label: "Avg. delivery time" },
+    { value: "98%", label: "Inbox placement" },
+  ]
+
   // Structured Data for SEO
   const structuredData = {
     "@context": "https://schema.org",
