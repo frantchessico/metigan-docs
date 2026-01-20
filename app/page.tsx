@@ -25,6 +25,7 @@ const companies = [
   { name: "Confirmado.pro", logo: "C" },
   { name: "Oito", logo: "O" },
   { name: "Flyone", logo: "F" },
+  { name: "Fumane Films", logo: "F" },
 ]
 
 const languages = [
@@ -167,7 +168,7 @@ const deliverabilityFeatures = [
 
 const stats = [
   { value: "99.9%", label: "Uptime SLA" },
-  { value: "3B+", label: "Emails sent" },
+  { value: "388K+", label: "Emails sent" },
   { value: "<1s", label: "Avg. delivery time" },
   { value: "98%", label: "Inbox placement" },
 ]
@@ -550,16 +551,18 @@ function Testimonial() {
           </div>
           
           <blockquote className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed text-white/90">
-            &ldquo;O Metigan transformou a forma como lidamos com email. A API é limpa, 
-            a entregabilidade é excelente, e a nossa equipe agora pode focar em construir 
-            features ao invés de lutar com infraestrutura de email.&rdquo;
+            &ldquo;Metigan changed the game for us at Fumane Films. We were spending 
+            hours fighting with email servers, now we just call the API and it works. 
+            The deliverability is incredible — our emails actually reach people.&rdquo;
           </blockquote>
           
           <div className="flex items-center justify-center gap-3 sm:gap-4">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500" />
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white font-bold text-sm sm:text-base">
+              GF
+            </div>
             <div className="text-left">
-              <p className="font-medium text-sm sm:text-base">Gamito Fulano</p>
-              <p className="text-xs sm:text-sm text-muted-foreground">Founder at SavanaPoint</p>
+              <p className="font-medium text-sm sm:text-base">Gamito Fumane</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">Founder at Fumane Films</p>
             </div>
           </div>
         </div>
