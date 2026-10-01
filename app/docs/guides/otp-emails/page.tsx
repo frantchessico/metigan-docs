@@ -234,7 +234,7 @@ sendVerificationCode("user@example.com");`}
             <CodeBlock
               language="bash"
               fileName="otp-curl.sh"
-              code={`curl -X POST https://api.metigan.com/api/otp \\
+              code={`curl -X POST https://api.metigan.io/api/otp \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{

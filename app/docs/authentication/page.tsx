@@ -16,7 +16,7 @@ export default function AuthenticationPage() {
         <section>
           <h2 className="text-3xl font-bold tracking-tight mb-4 scroll-mt-20">API Keys</h2>
           <p className="text-muted-foreground mb-6 leading-relaxed">
-            Metigan uses API keys to authenticate requests. You can create and manage your API keys in your <a href="https://app.metigan.com/api-keys" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Metigan Dashboard</a>. 
+            Metigan uses API keys to authenticate requests. You can create and manage your API keys in your <a href="https://app.metigan.io/api-keys" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Metigan Dashboard</a>. 
             API keys are scoped to your account and provide access to all features based on your plan.
           </p>
         </section>
@@ -28,7 +28,7 @@ export default function AuthenticationPage() {
           </p>
           <div className="space-y-4">
             {[
-              { step: 1, title: "Log in to Dashboard", description: "Log in to your Metigan Dashboard", link: "https://app.metigan.com" },
+              { step: 1, title: "Log in to Dashboard", description: "Log in to your Metigan Dashboard", link: "https://app.metigan.io" },
               { step: 2, title: "Navigate to API Keys", description: "Go to Settings â†’ API Keys section" },
               { step: 3, title: "Create API Key", description: "Click the 'Create API Key' button" },
               { step: 4, title: "Copy Your Key", description: "Copy your API key immediately (you'll only see it once!)" },

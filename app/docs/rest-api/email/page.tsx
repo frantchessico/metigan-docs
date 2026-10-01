@@ -116,7 +116,7 @@ export default function EmailEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X POST https://api.metigan.com/api/email/send \\
+          code={`curl -X POST https://api.metigan.io/api/email/send \\
   -H "x-api-key: your_api_key" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -132,7 +132,7 @@ export default function EmailEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X POST https://api.metigan.com/api/email/send \\
+          code={`curl -X POST https://api.metigan.io/api/email/send \\
   -H "x-api-key: your_api_key" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -152,7 +152,7 @@ export default function EmailEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X POST https://api.metigan.com/api/email/send \\
+          code={`curl -X POST https://api.metigan.io/api/email/send \\
   -H "x-api-key: your_api_key" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -277,7 +277,7 @@ export default function EmailEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X POST https://api.metigan.com/api/otp/send \\
+          code={`curl -X POST https://api.metigan.io/api/otp/send \\
   -H "x-api-key: your_api_key" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -422,7 +422,7 @@ export default function EmailEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X POST https://api.metigan.com/api/transactional/send \\
+          code={`curl -X POST https://api.metigan.io/api/transactional/send \\
   -H "x-api-key: your_api_key" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -437,7 +437,7 @@ export default function EmailEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X POST https://api.metigan.com/api/transactional/send \\
+          code={`curl -X POST https://api.metigan.io/api/transactional/send \\
   -H "x-api-key: your_api_key" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -548,7 +548,7 @@ export default function EmailEndpointsPage() {
         <CodeBlock
           language="javascript"
           fileName="send-email.js"
-          code={`const response = await fetch('https://api.metigan.com/api/email/send', {
+          code={`const response = await fetch('https://api.metigan.io/api/email/send', {
   method: 'POST',
   headers: {
     'x-api-key': 'your_api_key',
@@ -573,7 +573,7 @@ console.log(result);`}
           code={`import requests
 
 response = requests.post(
-    'https://api.metigan.com/api/email/send',
+    'https://api.metigan.io/api/email/send',
     headers={
         'x-api-key': 'your_api_key',
         'Content-Type': 'application/json'
@@ -595,7 +595,7 @@ print(result)`}
           language="php"
           fileName="send-email.php"
           code={`<?php
-$ch = curl_init('https://api.metigan.com/api/email/send');
+$ch = curl_init('https://api.metigan.io/api/email/send');
 
 curl_setopt_array($ch, [
     CURLOPT_POST => true,

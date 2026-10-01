@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { docsConfig } from '@/lib/docs-config'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://docs.metigan.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://docs.metigan.io'
   
   // Homepage
   const routes: MetadataRoute.Sitemap = [

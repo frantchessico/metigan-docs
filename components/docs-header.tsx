@@ -92,7 +92,7 @@ export function DocsHeader() {
         {/* Actions */}
         <div className="flex items-center space-x-2">
           <AskAI />
-          <Link href="https://app.metigan.com" className="hidden sm:inline-block">
+          <Link href="https://app.metigan.io" className="hidden sm:inline-block">
             <Button 
               variant="outline" 
               size="sm"

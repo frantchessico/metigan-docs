@@ -82,7 +82,7 @@ $client->email()->sendEmail(
     subject: 'Hello World',
     content: '<p>Welcome to Metigan!</p>'
 );`,
-  "cURL": `curl -X POST 'https://api.metigan.com/api/email/send' \\
+  "cURL": `curl -X POST 'https://api.metigan.io/api/email/send' \\
   -H 'Authorization: Bearer your_api_key' \\
   -H 'Content-Type: application/json' \\
   -d '{
@@ -174,26 +174,26 @@ const footerLinks = {
     { name: "Templates", href: "/docs/api/templates" },
     { name: "Audiences", href: "/docs/api/audiences" },
     { name: "Webhooks", href: "/docs/api/webhooks" },
-    { name: "Pricing", href: "https://metigan.com/pricing" },
+    { name: "Pricing", href: "https://metigan.io/pricing" },
   ],
   Developers: [
     { name: "Documentation", href: "/docs" },
     { name: "API Reference", href: "/docs/api/email" },
     { name: "SDKs", href: "/docs/installation" },
     { name: "Examples", href: "/docs/examples/nodejs" },
-    { name: "Changelog", href: "https://metigan.com/changelog" },
+    { name: "Changelog", href: "https://metigan.io/changelog" },
   ],
   Resources: [
-    { name: "Blog", href: "https://metigan.com/blog" },
+    { name: "Blog", href: "https://metigan.io/blog" },
     { name: "Guides", href: "/docs/guides/sending-emails" },
-    { name: "Status", href: "https://status.metigan.com" },
-    { name: "Support", href: "mailto:support@metigan.com" },
+    { name: "Status", href: "https://status.metigan.io" },
+    { name: "Support", href: "mailto:support@metigan.io" },
   ],
   Company: [
-    { name: "About", href: "https://metigan.com/about" },
-    { name: "Careers", href: "https://metigan.com/careers" },
-    { name: "Privacy", href: "https://metigan.com/privacy" },
-    { name: "Terms", href: "https://metigan.com/terms" },
+    { name: "About", href: "https://metigan.io/about" },
+    { name: "Careers", href: "https://metigan.io/careers" },
+    { name: "Privacy", href: "https://metigan.io/privacy" },
+    { name: "Terms", href: "https://metigan.io/terms" },
   ],
 }
 
@@ -428,7 +428,7 @@ function EmailPreview() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm sm:text-base">Welcome to Metigan</h3>
-                  <p className="text-xs sm:text-sm text-muted-foreground">hello@metigan.com</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">hello@metigan.io</p>
                 </div>
               </div>
               
@@ -690,7 +690,7 @@ export default function Home() {
       priceCurrency: "USD"
     },
     description: "Email for developers. The best way to reach humans instead of spam folders.",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://metigan.com",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://metigan.io",
   }
 
   return (
@@ -723,7 +723,7 @@ export default function Home() {
                 <Link href="/docs/api/email" className="text-sm text-muted-foreground hover:text-white transition-colors">
                   API Reference
                 </Link>
-                <Link href="https://metigan.com/pricing" className="text-sm text-muted-foreground hover:text-white transition-colors">
+                <Link href="https://metigan.io/pricing" className="text-sm text-muted-foreground hover:text-white transition-colors">
                   Pricing
                 </Link>
                 <Link href="https://github.com/metigan" target="_blank" className="text-sm text-muted-foreground hover:text-white transition-colors">
@@ -732,12 +732,12 @@ export default function Home() {
               </div>
               
               <div className="flex items-center gap-2 sm:gap-3">
-                <Link href="https://app.metigan.com/sign-in" className="hidden sm:block">
+                <Link href="https://app.metigan.io/sign-in" className="hidden sm:block">
                   <Button variant="ghost" size="sm" className="text-sm">
                     Sign In
                   </Button>
                 </Link>
-                <Link href="https://app.metigan.com/sign-up">
+                <Link href="https://app.metigan.io/sign-up">
                   <Button size="sm" className="text-xs sm:text-sm bg-white text-black hover:bg-white/90">
                     Get Started
                   </Button>
@@ -803,7 +803,7 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-2"
               >
-                <Link href="https://app.metigan.com/sign-up" className="w-full sm:w-auto">
+                <Link href="https://app.metigan.io/sign-up" className="w-full sm:w-auto">
                   <Button size="lg" className="w-full sm:w-auto text-sm sm:text-base px-6 sm:px-8 bg-white text-black hover:bg-white/90 gap-2">
                     Get Started
                     <ArrowRight className="w-4 h-4" />
@@ -992,7 +992,7 @@ export default function Home() {
               </p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-2">
-                <Link href="https://app.metigan.com/sign-up" className="w-full sm:w-auto">
+                <Link href="https://app.metigan.io/sign-up" className="w-full sm:w-auto">
                   <Button size="lg" className="w-full sm:w-auto text-sm sm:text-base px-6 sm:px-8 bg-white text-black hover:bg-white/90 gap-2">
                     Start for Free
                     <ArrowRight className="w-4 h-4" />

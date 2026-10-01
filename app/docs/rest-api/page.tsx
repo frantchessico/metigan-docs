@@ -33,15 +33,15 @@ export default function RestApiPage() {
         </p>
         <CodeBlock
           language="bash"
-          code={`https://api.metigan.com`}
+          code={`https://api.metigan.io`}
         />
         <Callout variant="info" title="Regional Endpoints">
           <p>
             For improved latency, you can use regional endpoints:
           </p>
           <ul className="list-disc list-inside mt-2 space-y-1">
-            <li><code className="text-sm bg-muted px-1.5 py-0.5 rounded">https://us.api.metigan.com</code> - US East</li>
-            <li><code className="text-sm bg-muted px-1.5 py-0.5 rounded">https://eu.api.metigan.com</code> - Europe</li>
+            <li><code className="text-sm bg-muted px-1.5 py-0.5 rounded">https://us.api.metigan.io</code> - US East</li>
+            <li><code className="text-sm bg-muted px-1.5 py-0.5 rounded">https://eu.api.metigan.io</code> - Europe</li>
           </ul>
         </Callout>
       </section>
@@ -55,7 +55,7 @@ export default function RestApiPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X POST https://api.metigan.com/api/email/send \\
+          code={`curl -X POST https://api.metigan.io/api/email/send \\
   -H "x-api-key: your_api_key_here" \\
   -H "Content-Type: application/json" \\
   -d '{"from": "sender@example.com", "recipients": ["user@example.com"], "subject": "Hello", "content": "<p>Hello World</p>"}'`}
@@ -380,7 +380,7 @@ export default function RestApiPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X POST https://api.metigan.com/api/email/send \\
+          code={`curl -X POST https://api.metigan.io/api/email/send \\
   -H "x-api-key: your_api_key" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -398,7 +398,7 @@ export default function RestApiPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X POST https://api.metigan.com/api/otp/send \\
+          code={`curl -X POST https://api.metigan.io/api/otp/send \\
   -H "x-api-key: your_api_key" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -417,7 +417,7 @@ export default function RestApiPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X POST https://api.metigan.com/api/transactional/send \\
+          code={`curl -X POST https://api.metigan.io/api/transactional/send \\
   -H "x-api-key: your_api_key" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -435,7 +435,7 @@ export default function RestApiPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X POST https://api.metigan.com/api/contacts \\
+          code={`curl -X POST https://api.metigan.io/api/contacts \\
   -H "x-api-key: your_api_key" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -491,8 +491,8 @@ export default function RestApiPage() {
             <p className="text-sm text-muted-foreground">
               Contact our support team for assistance.
             </p>
-            <a href="mailto:support@metigan.com" className="text-sm text-primary hover:underline mt-2 inline-block">
-              support@metigan.com →
+            <a href="mailto:support@metigan.io" className="text-sm text-primary hover:underline mt-2 inline-block">
+              support@metigan.io →
             </a>
           </div>
         </div>

@@ -104,7 +104,7 @@ export default function ContactsEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X POST https://api.metigan.com/api/contacts \\
+          code={`curl -X POST https://api.metigan.io/api/contacts \\
   -H "x-api-key: your_api_key" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -208,7 +208,7 @@ export default function ContactsEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X GET "https://api.metigan.com/api/contacts?audienceId=aud_abc123&status=subscribed&page=1&limit=50" \\
+          code={`curl -X GET "https://api.metigan.io/api/contacts?audienceId=aud_abc123&status=subscribed&page=1&limit=50" \\
   -H "x-api-key: your_api_key"`}
         />
 
@@ -255,7 +255,7 @@ export default function ContactsEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X GET https://api.metigan.com/api/contacts/con_xyz789 \\
+          code={`curl -X GET https://api.metigan.io/api/contacts/con_xyz789 \\
   -H "x-api-key: your_api_key"`}
         />
 
@@ -300,7 +300,7 @@ export default function ContactsEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X GET "https://api.metigan.com/api/contacts/email/john@example.com?audienceId=aud_abc123" \\
+          code={`curl -X GET "https://api.metigan.io/api/contacts/email/john@example.com?audienceId=aud_abc123" \\
   -H "x-api-key: your_api_key"`}
         />
       </section>
@@ -368,7 +368,7 @@ export default function ContactsEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X PATCH https://api.metigan.com/api/contacts/con_xyz789 \\
+          code={`curl -X PATCH https://api.metigan.io/api/contacts/con_xyz789 \\
   -H "x-api-key: your_api_key" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -423,7 +423,7 @@ export default function ContactsEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X DELETE https://api.metigan.com/api/contacts/con_xyz789 \\
+          code={`curl -X DELETE https://api.metigan.io/api/contacts/con_xyz789 \\
   -H "x-api-key: your_api_key"`}
         />
 
@@ -483,7 +483,7 @@ export default function ContactsEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X POST https://api.metigan.com/api/contacts/bulk \\
+          code={`curl -X POST https://api.metigan.io/api/contacts/bulk \\
   -H "x-api-key: your_api_key" \\
   -H "Content-Type: application/json" \\
   -d '{

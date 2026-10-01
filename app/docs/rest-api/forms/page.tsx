@@ -68,7 +68,7 @@ export default function FormsEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X POST https://api.metigan.com/api/forms/contact-form/submit \\
+          code={`curl -X POST https://api.metigan.io/api/forms/contact-form/submit \\
   -H "Content-Type: application/json" \\
   -d '{
     "field-email": "user@example.com",
@@ -94,7 +94,7 @@ export default function FormsEndpointsPage() {
           language="javascript"
           fileName="form-submit.js"
           code={`// Client-side form submission (no API key needed)
-const response = await fetch('https://api.metigan.com/api/forms/contact-form/submit', {
+const response = await fetch('https://api.metigan.io/api/forms/contact-form/submit', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
@@ -159,7 +159,7 @@ if (result.success) {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X GET "https://api.metigan.com/api/forms?page=1&limit=20" \\
+          code={`curl -X GET "https://api.metigan.io/api/forms?page=1&limit=20" \\
   -H "x-api-key: your_api_key"`}
         />
 
@@ -176,7 +176,7 @@ if (result.success) {
       "description": "Get in touch with us",
       "slug": "contact-form",
       "published": true,
-      "publishedUrl": "https://forms.metigan.com/f/contact-form",
+      "publishedUrl": "https://forms.metigan.io/f/contact-form",
       "analytics": {
         "views": 1234,
         "submissions": 89,
@@ -210,7 +210,7 @@ if (result.success) {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X GET https://api.metigan.com/api/forms/frm_abc123 \\
+          code={`curl -X GET https://api.metigan.io/api/forms/frm_abc123 \\
   -H "x-api-key: your_api_key"`}
         />
 
@@ -283,7 +283,7 @@ if (result.success) {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X GET https://api.metigan.com/api/forms/public/contact-form`}
+          code={`curl -X GET https://api.metigan.io/api/forms/public/contact-form`}
         />
 
         <h3 className="text-xl font-semibold mt-6">Response</h3>
@@ -380,7 +380,7 @@ if (result.success) {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X GET "https://api.metigan.com/api/forms/frm_abc123/submissions?page=1&limit=50" \\
+          code={`curl -X GET "https://api.metigan.io/api/forms/frm_abc123/submissions?page=1&limit=50" \\
   -H "x-api-key: your_api_key"`}
         />
 

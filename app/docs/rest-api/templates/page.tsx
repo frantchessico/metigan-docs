@@ -70,7 +70,7 @@ export default function TemplatesEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X GET "https://api.metigan.com/api/templates?page=1&limit=20" \\
+          code={`curl -X GET "https://api.metigan.io/api/templates?page=1&limit=20" \\
   -H "x-api-key: your_api_key"`}
         />
 
@@ -121,7 +121,7 @@ export default function TemplatesEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X GET https://api.metigan.com/api/templates/tpl_abc123 \\
+          code={`curl -X GET https://api.metigan.io/api/templates/tpl_abc123 \\
   -H "x-api-key: your_api_key"`}
         />
 
@@ -214,7 +214,7 @@ export default function TemplatesEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X POST https://api.metigan.com/api/templates/tpl_abc123/render \\
+          code={`curl -X POST https://api.metigan.io/api/templates/tpl_abc123/render \\
   -H "x-api-key: your_api_key" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -308,7 +308,7 @@ export default function TemplatesEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X POST https://api.metigan.com/api/email/send \\
+          code={`curl -X POST https://api.metigan.io/api/email/send \\
   -H "x-api-key: your_api_key" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -347,7 +347,7 @@ export default function TemplatesEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X DELETE https://api.metigan.com/api/templates/tpl_abc123 \\
+          code={`curl -X DELETE https://api.metigan.io/api/templates/tpl_abc123 \\
   -H "x-api-key: your_api_key"`}
         />
 

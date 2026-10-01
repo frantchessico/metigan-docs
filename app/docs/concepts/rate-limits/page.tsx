@@ -59,7 +59,7 @@ export default function RateLimitsPage() {
 
 // Check rate limit status
 async function checkRateLimit() {
-  const response = await fetch('https://api.metigan.com/v1/emails', {
+  const response = await fetch('https://api.metigan.io/v1/emails', {
     headers: {
       'Authorization': \`Bearer \${apiKey}\`
     }

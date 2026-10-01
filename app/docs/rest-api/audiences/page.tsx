@@ -67,7 +67,7 @@ export default function AudiencesEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X POST https://api.metigan.com/api/audiences \\
+          code={`curl -X POST https://api.metigan.io/api/audiences \\
   -H "x-api-key: your_api_key" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -134,7 +134,7 @@ export default function AudiencesEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X GET "https://api.metigan.com/api/audiences?page=1&limit=20" \\
+          code={`curl -X GET "https://api.metigan.io/api/audiences?page=1&limit=20" \\
   -H "x-api-key: your_api_key"`}
         />
 
@@ -185,7 +185,7 @@ export default function AudiencesEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X GET https://api.metigan.com/api/audiences/aud_abc123 \\
+          code={`curl -X GET https://api.metigan.io/api/audiences/aud_abc123 \\
   -H "x-api-key: your_api_key"`}
         />
 
@@ -222,7 +222,7 @@ export default function AudiencesEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X GET https://api.metigan.com/api/audiences/aud_abc123/stats \\
+          code={`curl -X GET https://api.metigan.io/api/audiences/aud_abc123/stats \\
   -H "x-api-key: your_api_key"`}
         />
 
@@ -260,7 +260,7 @@ export default function AudiencesEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X PATCH https://api.metigan.com/api/audiences/aud_abc123 \\
+          code={`curl -X PATCH https://api.metigan.io/api/audiences/aud_abc123 \\
   -H "x-api-key: your_api_key" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -301,7 +301,7 @@ export default function AudiencesEndpointsPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X DELETE https://api.metigan.com/api/audiences/aud_abc123 \\
+          code={`curl -X DELETE https://api.metigan.io/api/audiences/aud_abc123 \\
   -H "x-api-key: your_api_key"`}
         />
 

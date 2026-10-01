@@ -33,7 +33,7 @@ export default function AuthenticationPage() {
           To get your API key:
         </p>
         <ol className="list-decimal list-inside space-y-2 text-muted-foreground">
-          <li>Log in to your <Link href="https://app.metigan.com" className="text-primary hover:underline">Metigan Dashboard</Link></li>
+          <li>Log in to your <Link href="https://app.metigan.io" className="text-primary hover:underline">Metigan Dashboard</Link></li>
           <li>Navigate to <strong>Settings → API Keys</strong></li>
           <li>Click <strong>Create API Key</strong></li>
           <li>Give your key a descriptive name (e.g., "Production Server", "Development")</li>
@@ -60,7 +60,7 @@ export default function AuthenticationPage() {
         <CodeBlock
           language="bash"
           fileName="curl"
-          code={`curl -X POST https://api.metigan.com/api/email/send \\
+          code={`curl -X POST https://api.metigan.io/api/email/send \\
   -H "x-api-key: mtg_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxx" \\
   -H "Content-Type: application/json" \\
   -d '{"from": "hello@example.com", "recipients": ["user@example.com"], "subject": "Hello", "content": "<p>Hello World</p>"}'`}
@@ -70,7 +70,7 @@ export default function AuthenticationPage() {
         <CodeBlock
           language="javascript"
           fileName="example.js"
-          code={`const response = await fetch('https://api.metigan.com/api/email/send', {
+          code={`const response = await fetch('https://api.metigan.io/api/email/send', {
   method: 'POST',
   headers: {
     'x-api-key': process.env.METIGAN_API_KEY,
@@ -93,7 +93,7 @@ export default function AuthenticationPage() {
 import requests
 
 response = requests.post(
-    'https://api.metigan.com/api/email/send',
+    'https://api.metigan.io/api/email/send',
     headers={
         'x-api-key': os.environ['METIGAN_API_KEY'],
         'Content-Type': 'application/json'
@@ -112,7 +112,7 @@ response = requests.post(
           language="php"
           fileName="example.php"
           code={`<?php
-$ch = curl_init('https://api.metigan.com/api/email/send');
+$ch = curl_init('https://api.metigan.io/api/email/send');
 
 curl_setopt_array($ch, [
     CURLOPT_POST => true,
@@ -312,7 +312,7 @@ METIGAN_API_KEY=mtg_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxx`}
           If you suspect your API key has been compromised:
         </p>
         <ol className="list-decimal list-inside space-y-2 text-muted-foreground">
-          <li>Go to <Link href="https://app.metigan.com/settings/api-keys" className="text-primary hover:underline">Settings → API Keys</Link> in your dashboard</li>
+          <li>Go to <Link href="https://app.metigan.io/settings/api-keys" className="text-primary hover:underline">Settings → API Keys</Link> in your dashboard</li>
           <li>Find the compromised key</li>
           <li>Click the <strong>Revoke</strong> button</li>
           <li>Create a new API key</li>

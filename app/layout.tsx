@@ -42,10 +42,10 @@ export const metadata: Metadata = {
     "email deliverability",
     "Metigan"
   ],
-  authors: [{ name: "Metigan", url: "https://metigan.com" }],
+  authors: [{ name: "Metigan", url: "https://metigan.io" }],
   creator: "Metigan",
   publisher: "Metigan",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://docs.metigan.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://docs.metigan.io"),
   alternates: {
     canonical: "/",
   },

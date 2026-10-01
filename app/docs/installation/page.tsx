@@ -77,7 +77,7 @@ pnpm add metigan`}
               <div>
                 <p className="font-medium mb-1">API Key</p>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  A valid Metigan API key is required. Get one from your <a href="https://app.metigan.com/api-keys" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">dashboard</a>.
+                  A valid Metigan API key is required. Get one from your <a href="https://app.metigan.io/api-keys" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">dashboard</a>.
                 </p>
               </div>
             </div>

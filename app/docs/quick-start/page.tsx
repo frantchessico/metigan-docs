@@ -25,7 +25,7 @@ export default function QuickStartPage() {
         </div>
         <div className="ml-14 space-y-4">
           <p className="text-muted-foreground leading-relaxed">
-            First, you'll need an API key. You can create one in your <Link href="https://app.metigan.com/api-keys" target="_blank" className="text-primary hover:underline font-medium">Metigan Dashboard</Link> under Settings â†’ API Keys.
+            First, you'll need an API key. You can create one in your <Link href="https://app.metigan.io/api-keys" target="_blank" className="text-primary hover:underline font-medium">Metigan Dashboard</Link> under Settings â†’ API Keys.
           </p>
           <Callout variant="warning" title="Security Best Practice">
             <p>

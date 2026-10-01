@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/_next/'],
     },
-    sitemap: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://docs.metigan.com'}/sitemap.xml`,
+    sitemap: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://docs.metigan.io'}/sitemap.xml`,
   }
 }
 
