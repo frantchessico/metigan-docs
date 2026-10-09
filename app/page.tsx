@@ -59,13 +59,13 @@ client.email.send_email(
 )`,
   "Go": `package main
 
-import "github.com/metigan/metigan-go"
+import metigan "github.com/metigan/go"
 
 client := metigan.NewClient(metigan.Config{
     APIKey: "your_api_key",
 })
 
-client.Email().SendEmail(metigan.EmailOptions{
+client.Email().SendEmail(ctx, metigan.EmailOptions{
     From:       "hello@example.com",
     Recipients: []string{"user@gmail.com"},
     Subject:    "Hello World",
@@ -83,7 +83,7 @@ $client->email()->sendEmail(
     content: '<p>Welcome to Metigan!</p>'
 );`,
   "cURL": `curl -X POST 'https://api.metigan.io/api/email/send' \\
-  -H 'Authorization: Bearer your_api_key' \\
+  -H 'X-Api-Key: your_api_key' \\
   -H 'Content-Type: application/json' \\
   -d '{
     "from": "hello@example.com",

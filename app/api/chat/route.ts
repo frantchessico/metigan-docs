@@ -26,14 +26,14 @@ Metigan is an email API for developers. Here's what you know about Metigan:
 - GET/POST/PUT/DELETE /api/forms - Manage forms
 
 ## Authentication
-All API requests require an API key sent via:
-- Header: Authorization: Bearer YOUR_API_KEY
-- Or: X-API-Key: YOUR_API_KEY
+All API requests require an API key sent in the header:
+- X-Api-Key: YOUR_API_KEY
+(Authorization: Bearer is not accepted for API keys.)
 
 ## SDK Installation
 - Node.js: npm install metigan
 - Python: pip install metigan
-- Go: go get github.com/metigan/metigan-go
+- Go: go get github.com/metigan/go (import metigan "github.com/metigan/go"; every method takes a context.Context first)
 - PHP: composer require metigan/metigan-php
 
 ## Quick Example (Node.js)
